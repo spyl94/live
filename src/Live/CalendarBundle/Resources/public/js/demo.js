@@ -86,7 +86,7 @@ $(document).ready(function() {
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
 
-                   $.ajax({url:"http://localhost/live/web/app_dev.php/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
+                   $.ajax({url:"http://live.spyl.net/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
                     success: function(){$("div#messageCal").empty().html("Successfully created the reservation!").slideDown("normal", function(){window.setTimeout(function(){$("div#messageCal").slideUp('normal');$dialogContent.dialog("close");}, 2000)}).position({of:"body"});$calendar.weekCalendar("refresh");}, error: function(){$("div#oopsCal").empty().html("Oops, something went wrong saving the reservation. Contact the Support Team.").dialog("open");$dialogContent.dialog("close");$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeUnsavedEvents");
@@ -104,11 +104,11 @@ $(document).ready(function() {
 
       },
       eventDrop : function(calEvent, $event) {
-          $.ajax({url:"http://localhost/live/web/app_dev.php/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
+          $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
                     success: function(){$("div#messageCal").empty().html("Successfully created the reservation!").slideDown("normal", function(){window.setTimeout(function(){$("div#messageCal").slideUp('normal');$dialogContent.dialog("close");}, 2000)}).position({of:"body"});$calendar.weekCalendar("refresh");}, error: function(){$("div#oopsCal").empty().html("Oops, something went wrong saving the reservation. Contact the Support Team.").dialog("open");$dialogContent.dialog("close");$calendar.weekCalendar("refresh");}});
       },
       eventResize : function(calEvent, $event) {
-           $.ajax({url:"http://localhost/live/web/app_dev.php/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
+           $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
                     success: function(){$("div#messageCal").empty().html("Successfully created the reservation!").slideDown("normal", function(){window.setTimeout(function(){$("div#messageCal").slideUp('normal');$dialogContent.dialog("close");}, 2000)}).position({of:"body"});$calendar.weekCalendar("refresh");}, error: function(){$("div#oopsCal").empty().html("Oops, something went wrong saving the reservation. Contact the Support Team.").dialog("open");$dialogContent.dialog("close");$calendar.weekCalendar("refresh");}});
       },
       eventClick : function(calEvent, $event) {
@@ -140,13 +140,13 @@ $(document).ready(function() {
                   calEvent.end = new Date(endField.val());
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
-                   $.ajax({url:"http://localhost/live/web/app_dev.php/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
+                   $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
                     success: function(){$("div#messageCal").empty().html("Successfully created the reservation!").slideDown("normal", function(){window.setTimeout(function(){$("div#messageCal").slideUp('normal');$dialogContent.dialog("close");}, 2000)}).position({of:"body"});$calendar.weekCalendar("refresh");}, error: function(){$("div#oopsCal").empty().html("Oops, something went wrong saving the reservation. Contact the Support Team.").dialog("open");$dialogContent.dialog("close");$calendar.weekCalendar("refresh");}});
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
                "delete" : function() {
-                   $.ajax({url:"http://localhost/live/web/app_dev.php/calendar/removeEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
+                   $.ajax({url:"http://live.spyl.net/calendar/removeEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
                     success: function(){$("div#messageCal").empty().html("Successfully created the reservation!").slideDown("normal", function(){window.setTimeout(function(){$("div#messageCal").slideUp('normal');$dialogContent.dialog("close");}, 2000)}).position({of:"body"});$calendar.weekCalendar("refresh");}, error: function(){$("div#oopsCal").empty().html("Oops, something went wrong saving the reservation. Contact the Support Team.").dialog("open");$dialogContent.dialog("close");$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeEvent", calEvent.id);
@@ -173,7 +173,7 @@ $(document).ready(function() {
 
       },
       data: function(start, end, callback) {
-        $.getJSON("http://localhost/live/web/app_dev.php/calendar/getEventData", {
+        $.getJSON("http://live.spyl.net/calendar/getEventData", {
            start: start.getTime(),
            end: end.getTime()
          },  function(result) {
