@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery-ui-1.8.11.custom.css') }}' />
+	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
+	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/demo.css') }}' />
+	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
+	
+	
+	<!--<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
+    <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/demo.js') }}'></script>
+
+</head>
+<body> 
+	<h1>Réservation du local</h1>
+
+	<div id='calendar'></div>
+	<div id="event_edit_container">
+		<form>
+			<input type="hidden" />
+			<ul>
+				<li>
+					<span>Date: </span><span class="date_holder"></span> 
+				</li>
+				<li>
+					<label for="start">Début: </label><select name="start"><option value="">Select Start Time</option></select>
+				</li>
+				<li>
+					<label for="end">Fin: </label><select name="end"><option value="">Select End Time</option></select>
+				</li>
+				<li>
+					<label for="title">Titre: </label><input type="text" name="title" />
+				</li>
+			</ul>
+		</form>
+	</div>
+	<div>(c) Spyl</div>
+</body>
+</html>
