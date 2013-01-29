@@ -49,14 +49,21 @@ class DefaultController extends Controller
     	$request = $this->getRequest();
 		if($request->isXmlHttpRequest()) {
 
-	    	$event = new Event();
-		    $event->setStart($request->request->get('start')); // get a $_POST parameter
-		    $event->setEnd($request->request->get('end'));
-		    $event->setTitle($request->request->get('title'));
+			if (true === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
 
-		    $em = $this->getDoctrine()->getManager();
-		    $em->persist($event);
-		    $em->flush();
+		    	$event = new Event();
+			    $event->setStart($request->request->get('start'));
+			    $event->setEnd($request->request->get('end'));
+			    $event->setTitle($request->request->get('title'));
+			    $event->setValidate(false);
+			    $user = $this->getUser();
+			    $event->setCreator($user);
+			    $em = $this->getDoctrine()->getManager();
+			    $em->persist($event);
+			    $em->flush();
+			    return new Response("La réservation a été crée avec succès !");
+			}
+			return new Response("Pour effectuer une réservation, vous devez vous connecter !");
 		}
 		return new Response();
     }
@@ -81,6 +88,7 @@ class DefaultController extends Controller
 			    $em = $this->getDoctrine()->getManager();
 			    $em->persist($event);
 			    $em->flush();
+			    return new Response("Modification effectuée avec succès !");
 	    	}
 		}
 		return new Response();
@@ -103,6 +111,7 @@ class DefaultController extends Controller
 	    		$em = $this->getDoctrine()->getManager();
 			    $em->remove($event);
 			    $em->flush();
+			    return new Response("La réservation a été supprimée avec succès !");
 	    	}
 		}
 		return new Response();

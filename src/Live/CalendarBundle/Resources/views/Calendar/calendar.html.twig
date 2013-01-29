@@ -8,8 +8,6 @@
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
 	
-	
-	
 	<!--<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
@@ -18,12 +16,16 @@
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
+	 <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/alert.js') }}'></script>
 
 </head>
 <body> 
-	<span>Réservation du local</span>
+	<span>Réservation du local !</span>
 	
-	<div id="message-info" style="display: none; text-align: center;margin-bottom: 20px;"></div>
+	<div style="height: 25px">
+		
+	<div id="message-info" style="z-index: 2; position: relative; text-align: center; margin-left: auto; width: auto; margin-left: auto;margin-right:auto;"></div>
+	</div>
 	<div id='calendar'></div>
 	<div id="event_edit_container">
 		<form>

@@ -42,6 +42,21 @@ class Event
      */
     private $title;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validate", type="boolean")
+     */
+    private $validate;
+
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Live\UserBundle\Entity\User", inversedBy="events")
+     */
+    private $creator;
+
+
 
     /**
      * Get id
@@ -120,5 +135,51 @@ class Event
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set validate
+     *
+     * @param boolean $validate
+     * @return Event
+     */
+    public function setValidate($validate)
+    {
+        $this->validate = $validate;
+    
+        return $this;
+    }
+
+    /**
+     * Get validate
+     *
+     * @return boolean 
+     */
+    public function getValidate()
+    {
+        return $this->validate;
+    }
+
+    /**
+     * Set creator
+     *
+     * @param \Live\UserBundle\Entity\User $creator
+     * @return Event
+     */
+    public function setCreator(\Live\UserBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+    
+        return $this;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return \Live\UserBundle\Entity\User 
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

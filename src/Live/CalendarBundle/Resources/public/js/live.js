@@ -82,7 +82,7 @@ $(document).ready(function() {
                   calEvent.body = bodyField.val();
 
                    $.ajax({url:"http://live.spyl.net/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(){$("#message-info").fadeIn().empty().html("La réservation a été crée avec succès !").fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeUnsavedEvents");
                   $calendar.weekCalendar("updateEvent", calEvent);
@@ -100,11 +100,11 @@ $(document).ready(function() {
       },
       eventDrop : function(calEvent, $event) {
           $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(){$("#message-info").fadeIn().empty().html("La réservation a été crée avec succès !").fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
       },
       eventResize : function(calEvent, $event) {
            $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(){$("#message-info").fadeIn().empty().html("La réservation a été crée avec succès !").fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
       },
       eventClick : function(calEvent, $event) {
 
@@ -136,13 +136,13 @@ $(document).ready(function() {
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
                    $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(){$("#message-info").fadeIn().empty().html("La réservation a été modifiée avec succès !");$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
-               "delete" : function() {
+               "delete" : function(msg) {
                    $.ajax({url:"http://live.spyl.net/calendar/removeEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(){$("#message-info").fadeIn().empty().html("La réservation a été supprimée avec succès !");$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeEvent", calEvent.id);
                   $dialogContent.dialog("close");
