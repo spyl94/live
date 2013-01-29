@@ -82,7 +82,7 @@ $(document).ready(function() {
                   calEvent.body = bodyField.val();
 
                    $.ajax({url:"http://live.spyl.net/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');}, error: function(){$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeUnsavedEvents");
                   $calendar.weekCalendar("updateEvent", calEvent);
@@ -136,7 +136,7 @@ $(document).ready(function() {
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
                    $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut('slow');}, error: function(){$calendar.weekCalendar("refresh");}});
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
