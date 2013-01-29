@@ -32,7 +32,7 @@
       options: {
         date: new Date(),
         timeFormat: null,
-        dateFormat: 'M d, Y',
+        dateFormat: 'd M Y',
         alwaysDisplayTimeMinutes: true,
         use24Hour: false,
         daysToShow: 7,
@@ -46,11 +46,11 @@
                   }
               }, // 0 = Sunday, 1 = Monday, 2 = Tuesday, ... , 6 = Saturday
         useShortDayNames: false,
-        timeSeparator: ' to ',
+        timeSeparator: ' à ',
         startParam: 'start',
         endParam: 'end',
         businessHours: {start: 8, end: 18, limitDisplay: false},
-        newEventText: 'New Event',
+        newEventText: 'Nouvel événement',
         timeslotHeight: 20,
         defaultEventLength: 2,
         timeslotsPerHour: 4,

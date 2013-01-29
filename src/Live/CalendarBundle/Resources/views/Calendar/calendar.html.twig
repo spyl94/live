@@ -5,21 +5,25 @@
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
     <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery-ui-1.8.11.custom.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
-	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/demo.css') }}' />
+	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
+	
 	
 	
 	<!--<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
+	
+	
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
-	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/demo.js') }}'></script>
+	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
 
 </head>
 <body> 
-	<h1>Réservation du local</h1>
-
+	<span>Réservation du local</span>
+	
+	<div id="message-info" style="display: none; text-align: center;margin-bottom: 20px;"></div>
 	<div id='calendar'></div>
 	<div id="event_edit_container">
 		<form>
@@ -40,6 +44,6 @@
 			</ul>
 		</form>
 	</div>
-	<div>(c) Spyl</div>
+
 </body>
 </html>
