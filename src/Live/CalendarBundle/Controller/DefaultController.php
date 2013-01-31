@@ -33,7 +33,8 @@ class DefaultController extends Controller
     			"id" => $value->getId(),
     			"start" => $value->getStart(),
     			"end" => $value->getEnd(),
-    			"title" => $value->getTitle()
+    			"title" => $value->getTitle(),
+    			"validate" => $value->getValidate()
     			);
     	}
     	return new Response(json_encode($tab));
@@ -61,7 +62,7 @@ class DefaultController extends Controller
 			    $em = $this->getDoctrine()->getManager();
 			    $em->persist($event);
 			    $em->flush();
-			    return new Response("La réservation a été crée avec succès !");
+			    return new Response("La réservation a été ajoutée avec succès !");
 			}
 			return new Response("Pour effectuer une réservation, vous devez vous connecter !");
 		}
@@ -80,18 +81,20 @@ class DefaultController extends Controller
 
 			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
 	    	$event = $repository->findOneById($request->request->get('eventID'));
-	    	if($event) {
+	    	if($event && (true === $this->get('security.context')->isGranted('IS_ADMIN') || $event->getCreator() == $this->getUser())) {
 	    		$event->setStart($request->request->get('start'));
 			    $event->setEnd($request->request->get('end'));
 			    $event->setTitle($request->request->get('title'));
+			    $event->setValidate(false);
 
 			    $em = $this->getDoctrine()->getManager();
 			    $em->persist($event);
 			    $em->flush();
 			    return new Response("Modification effectuée avec succès !");
 	    	}
+	    	return new Response("Vous ne pouvez pas modifier cet évent !");
 		}
-		return new Response();
+		return new Response("");
     }
 
 
@@ -107,11 +110,35 @@ class DefaultController extends Controller
 
 			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
 	    	$event = $repository->findOneById($request->request->get('eventID'));
-	    	if($event) {
+	    	if($event && (true === $this->get('security.context')->isGranted('IS_ADMIN') || $event->getCreator() == $this->getUser())) {
 	    		$em = $this->getDoctrine()->getManager();
 			    $em->remove($event);
 			    $em->flush();
 			    return new Response("La réservation a été supprimée avec succès !");
+	    	}
+	    	return new Response("Vous ne pouvez pas supprimer cet évenement !");
+		}
+		return new Response();
+    }
+
+
+    /**
+	 * @Route("/calendar/validateEvent", name="validateEvent")
+	 * @Template()
+	*/
+    public function validateEventAction()
+    {
+    	$request = $this->getRequest();
+		if($request->isXmlHttpRequest()) {
+
+			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+	    	$event = $repository->findOneById($request->request->get('eventID'));
+	    	if($event) {
+	    		$event->setValidate(true);
+	    		$em = $this->getDoctrine()->getManager();
+			    $em->persist($event);
+			    $em->flush();
+			    return new Response("La réservation a été validée avec succès !");
 	    	}
 		}
 		return new Response();

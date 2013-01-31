@@ -15,18 +15,19 @@
 	
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
-	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
-	 <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/alert.js') }}'></script>
+	{% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script> 
+	{% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
+	{% endif %}
 
 </head>
 <body> 
 	<span>Réservation du local !</span>
-	
+	<a href="{{ path('fos_user_security_login') }}">login</a>
 	<div style="height: 25px">
 		
-	<div id="message-info" style="z-index: 2; position: relative; text-align: center; margin-left: auto; width: auto; margin-left: auto;margin-right:auto;"></div>
+	<div id="message-info" style="display: none;"></div>
 	</div>
-	<div id='calendar'></div>
+	<div id='calendar' style="cursor: pointer"></div>
 	<div id="event_edit_container">
 		<form>
 			<input type="hidden" />
