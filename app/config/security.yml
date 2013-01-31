@@ -5,6 +5,9 @@ jms_security_extra:
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
+    providers:
+        main:
+            entity: { class: Live\UserBundle\Entity\User, property: username }
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -20,6 +23,8 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
+                always_use_default_target_path: true
+                default_target_path: /calendar
             logout:       true
             anonymous:    true
 
