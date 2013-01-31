@@ -46,7 +46,6 @@ class DefaultController extends Controller
 	 */
     public function addEventAction()
     {
-
     	$request = $this->getRequest();
 		if($request->isXmlHttpRequest()) {
 
@@ -75,7 +74,6 @@ class DefaultController extends Controller
 	 */
     public function editEventAction()
     {
-
     	$request = $this->getRequest();
 		if($request->isXmlHttpRequest()) {
 
