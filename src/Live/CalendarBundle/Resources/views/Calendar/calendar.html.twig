@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-
+{% extends "LiveMainBundle::layout.html.twig" %}
+	{% block stylesheets %}
+	{{ parent() }}
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
     <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery-ui-1.8.11.custom.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
 	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
+	{% endblock %}
 	
-	<!--<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	{% block javascript %}
+	{{ parent() }}
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
-	
-	
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
 	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
 	{% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script> 
 	{% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
 	{% endif %}
+	
+	{% endblock %}
 
-</head>
-<body> 
+{% block body %}
+     
 	<span>Réservation du local !</span>
-	<a href="{{ path('fos_user_security_login') }}">login</a>
 	<div style="height: 25px">
 		
 	<div id="message-info" style="display: none;"></div>
@@ -47,6 +46,4 @@
 			</ul>
 		</form>
 	</div>
-
-</body>
-</html>
+{% endblock %}

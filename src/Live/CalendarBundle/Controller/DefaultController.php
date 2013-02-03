@@ -11,7 +11,7 @@ use Live\CalendarBundle\Entity\Event;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/calendar")
+     * @Route("/calendar", name="calendar")
      * @Template()
      */
     public function indexAction()

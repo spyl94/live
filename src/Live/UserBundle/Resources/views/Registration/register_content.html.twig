@@ -1,0 +1,45 @@
+
+ <h2>Inscription</h2>
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal" novalidate>
+    
+    {% if form_errors(form) is not empty %}
+	<div class="control-group error">
+		<span class="help-inline">{{ form_errors(form) }}</span>
+	</div>
+	{% endif %}
+	
+		<div class="control-group {% if form_errors(form.username) is not empty %}error{% endif %}">
+				{{ form_label(form.username, "Nom d'utilisateur", { 'label_attr': {'class': 'control-label'} }) }}
+				<div class="controls">
+					{{ form_widget(form.username) }}
+					<span class="help-inline">{{ form_errors(form.username) }}</span>
+				</div>
+		</div>
+		<div class="control-group {% if form_errors(form.email) is not empty %}error{% endif %}">
+				{{ form_label(form.email, "Adresse e-mail", { 'label_attr': {'class': 'control-label'} }) }}
+				<div class="controls">
+						{{ form_widget(form.email) }}
+						<span class="help-inline">{{ form_errors(form.email) }}</span>
+				</div>
+		</div>
+		<div class="control-group {% if form_errors(form.plainPassword.first) is not empty %}error{% endif %}">
+				{{ form_label(form.plainPassword.first, "Mot de Passe", { 'label_attr': {'class': 'control-label'} }) }}
+				<div class="controls">
+						{{ form_widget(form.plainPassword.first) }}
+						<span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+				</div>
+		</div>
+		<div class="control-group {% if form_errors(form.plainPassword.second) is not empty %}error{% endif %}">
+				{{ form_label(form.plainPassword.second, "Vérification", { 'label_attr': {'class': 'control-label'} }) }}
+				<div class="controls">
+						{{ form_widget(form.plainPassword.second) }}
+						<span class="help-inline">{{ form_errors(form.plainPassword.second) }}</span>
+				</div>
+		</div>
+
+	{{ form_rest(form) }}
+    
+    <div class="control-group"><div class="controls">
+        <input class="btn" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div></div>
+</form>

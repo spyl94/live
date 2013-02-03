@@ -3,6 +3,11 @@ body {
 	font-size: 83.33%;
 }
 
+td.wc-scrollbar-shim {
+	width: 0 !important;
+	display: none !important;
+}
+
 h1 {
 	padding: 0.5em;
 	font-size: 1.6em;
