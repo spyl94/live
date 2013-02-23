@@ -1,49 +1,54 @@
 {% extends "LiveMainBundle::layout.html.twig" %}
-	{% block stylesheets %}
-	{{ parent() }}
-	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
+    {% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
     <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery-ui-1.8.11.custom.css') }}' />
-	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
-	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
-	<link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
-	{% endblock %}
-	
-	{% block javascript %}
-	{{ parent() }}
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
+    {% endblock %}
+
+    {% block javascript %}
+    {{ parent() }}
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
-	<script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
-	{% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script> 
-	{% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
-	{% endif %}
-	
-	{% endblock %}
+    <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
+    {% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script>
+    {% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
+    {% endif %}
+
+    {% endblock %}
 
 {% block body %}
-     
-	<span>Réservation du local !</span>
-	<div style="height: 25px">
-		
-	<div id="message-info" style="display: none;"></div>
-	</div>
-	<div id='calendar' style="cursor: pointer"></div>
-	<div id="event_edit_container">
-		<form>
-			<input type="hidden" />
-			<ul>
-				<li>
-					<span>Date: </span><span class="date_holder"></span> 
-				</li>
-				<li>
-					<label for="start">Début: </label><select name="start"><option value="">Select Start Time</option></select>
-				</li>
-				<li>
-					<label for="end">Fin: </label><select name="end"><option value="">Select End Time</option></select>
-				</li>
-				<li>
-					<label for="title">Titre: </label><input type="text" name="title" />
-				</li>
-			</ul>
-		</form>
-	</div>
+    <div style="height: 25px; margin-top: 34px">
+        <div id="message-info" style="display: none;"></div>
+    </div>
+
+
+    <div id='calendar'></div>
+    <div id="event_edit_container">
+        <form>
+            <input type="hidden" />
+            <ul>
+                <li>
+                    <span>Date: </span><span class="date_holder"></span>
+                </li>
+                <li>
+                    <label for="start">Début: </label><select name="start"><option value="">Select Start Time</option></select>
+                </li>
+                <li>
+                    <label for="end">Fin: </label><select name="end"><option value="">Select End Time</option></select>
+                </li>
+                <li>
+                    <label for="title">Titre: </label><input type="text" name="title" />
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="legende">
+        <span class="case-legende validate"></span><span class="case-text">Validé</span>
+        <span class="case-legende waiting"></span><span class="case-text">En attente</span>
+        <span class="case-legende refused"></span><span class="case-text">Refusé</span>
+        <span class="case-legende past"></span><span class="case-text">Passé</span>
+    </div>
 {% endblock %}

@@ -2,6 +2,15 @@ body {
         padding-top: 60px;
         padding-bottom: 40px;
         background-color: lightgrey;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+body, div {
+    margin: 0;
+}
+
+li {
+    list-style: none;
 }
 
 .container-fluid {
@@ -19,64 +28,43 @@ body {
     outline:none;
 }
 
-/* Fix Dropdown Scroll */
-a.dropdown-toggle {
-    position: relative;
-}
-a.dropdown-toggle::before {
-    content: '';
-    display: inline-block;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 7px solid #CCC;
-    border-bottom-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    bottom: -2px;
-    right: 7px;
-    display: none;
-}
-a.dropdown-toggle::after {
-    content: '';
-    display: inline-block;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid white;
-    position: absolute;
-    bottom: -2px;
-    right: 8px;
-    z-index: 1001;
-    display: none;
-}
-.open > a.dropdown-toggle::before,
-.open > a.dropdown-toggle::after {
-    display: block;
-}
-.dropdown-menu {
-    max-height: 800px;
-    overflow: hidden;
-    overflow-y: auto;
+.navbar-inner {
+    color: yellow;
+    background-image: -moz-linear-gradient(center top , #ffcc00, #fb9b00);
+    background: #ffcc00; /* Old browsers */
+    background: -moz-linear-gradient(center top, #ffcc00, #f7c438 53%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, #ffcc00, #fb9b00); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffcc00,#fb9b00); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffcc00,#fb9b00); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffcc00,#fb9b00); /* IE10+ */
+    background: linear-gradient(to bottom, #ffcc00,#fb9b00); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', endColorstr='#fb9b00',GradientType=0 ); /* IE6-9 */
 }
 
-#manga-list {
-    text-align: center;
-    margin: 20px 20px 0 20px;
-    background-color: lightgrey;
-}
 #footer {
-    margin-top: 10px;
-    clear: both;
-    display: block;
     text-align: center;
 }
-.load {
-    background:url('../img/loading.gif') no-repeat center;
-}
 
+.navbar .btn-group {
+    margin: 0;
+    padding: 12px 5px 6px;
+}
 
 @media screen and (max-width: 960px) {
 	body {
-	        padding-top: 0;
-	        padding-bottom: 0;
+	    padding-top: 0;
+	    padding-bottom: 0;
+         margin: 0;
 	}
+    .wc-display.ui-buttonset {
+        display: none;
+    }
 	.pull-right {float: none;}
+    h1.wc-title {overflow: hidden;}
+    .navbar-inner {
+        margin: 0 20px 0 20px;
+    }
+    .navbar .btn-navbar {
+        margin: 15px;
+    }
 }

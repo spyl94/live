@@ -3,34 +3,35 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}live.spyl.net{% endblock %}</title>
+        <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.gif') }}" />
+        <title>{% block title %}live.assos.efrei.fr{% endblock %}</title>
 
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" />
-			  <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" type="text/css" />
-			  <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />               
-		    {% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+        {% endblock %}
     </head>
     <body>
-    	<div class="navbar navbar-fixed-top">
-   		    <div class="navbar-inner">
-    			<div class="container">
-     
-				    <!-- toggle navbar content -->
-				    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				    <span class="icon-bar"></span>
-				    </a>
-				    
-				    <a class="brand" href="{{ path('index') }}" >live.spyl.net</a>
-				    <ul class="nav">
+      <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+          <div class="container">
+
+            <!-- toggle navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="{{ path('index') }}" ><img src="{{ asset('img/logo.png') }}"></a>
+            <ul class="nav">
                         {% block navbar_title %}{% endblock %}
-                    </ul>
-                    
-				    <!-- hidden at 940px or less -->
-				    <div class="nav-collapse">
-					    <div class="btn-group pull-right">
+            </ul>
+
+            <!-- hidden at 940px or less -->
+            <div class="nav-collapse">
+              <div class="btn-group pull-right">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                   <i class="icon-user"></i> {{ app.user.username }} <span class="caret"></span>
@@ -41,22 +42,23 @@
                                   <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                                 </ul>
                             {% else %}
+                                <a class="btn" href="{{ path('fos_user_registration_register') }}">Inscription</a>
                                 <a class="btn" href="{{ path('fos_user_security_login') }}">Connexion</a>
-                            {% endif %}               
-				         </div>
-				    </div>
-     
-   			 	</div>
-    		</div>
-    	</div>
-        <!-- block body -->   
+                            {% endif %}
+                 </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+        <!-- block body -->
         {% block body %}
         {% endblock %}
-        <!-- end block body --> 
+        <!-- end block body -->
         {% block footer %}
-        <div id="footer">© {{ "now"|date('Y') }} Spyl - live.spyl.net </div>
+        <div id="footer">© {{ "now"|date('Y') }} <a href="http://blog.spyl.net">Spyl</a> - <a href="http://live.assos.efrei.fr">live.assos.efrei.fr</a> </div>
         {% endblock %}
-        
+
         {% block javascript %}
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -71,6 +73,6 @@
           })();
         </script>
         {% endblock %}
-	
+
     </body>
 </html>

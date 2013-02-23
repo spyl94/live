@@ -49,6 +49,13 @@ class Event
      */
     private $validate;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="refused", type="boolean")
+     */
+    private $refused;
+
 
     /**
      *
@@ -158,6 +165,29 @@ class Event
     public function getValidate()
     {
         return $this->validate;
+    }
+
+    /**
+     * Set  refused
+     *
+     * @param boolean $refused
+     * @return Event
+     */
+    public function setRefused($refused)
+    {
+        $this->refused = $refused;
+    
+        return $this;
+    }
+
+    /**
+     * Get refused
+     *
+     * @return boolean 
+     */
+    public function getRefused()
+    {
+        return $this->refused;
     }
 
     /**

@@ -19,6 +19,6 @@ class DefaultController extends Controller
        return new RedirectResponse($this->generateUrl('calendar'));
     }
 }
-	
+
 
 

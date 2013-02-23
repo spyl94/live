@@ -19,128 +19,171 @@ class DefaultController extends Controller
         return $this->render('LiveCalendarBundle:Calendar:calendar.html.twig');
     }
 
-	/**
-	 * @Route("/calendar/getEventData", name="getEventData")
-	 * @Template()
-	 */
+    /**
+     * @Route("/calendar/getEventData", name="getEventData")
+     * @Template()
+     */
     public function getEventDataAction()
     {
-    	$tab = array();
-    	$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
-    	$events = $repository->findAll();
-    	foreach ($events as $key => $value) {
-    		$tab[$key] = array (
-    			"id" => $value->getId(),
-    			"start" => $value->getStart(),
-    			"end" => $value->getEnd(),
-    			"title" => $value->getTitle(),
-    			"validate" => $value->getValidate()
-    			);
-    	}
-    	return new Response(json_encode($tab));
+        $tab = array();
+        $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+        $events = $repository->findAll();
+        foreach ($events as $key => $value) {
+            $tab[$key] = array (
+                "id" => $value->getId(),
+                "start" => $value->getStart(),
+                "end" => $value->getEnd(),
+                "title" => $value->getTitle(),
+                "validate" => $value->getValidate(),
+                "readOnly" => $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') && ($value->getCreator() == $this->getUser() ||
+                 $this->get('security.context')->isGranted('ROLE_ADMIN')) ? false : true,
+                "refused" => $value->getRefused(),
+                "creator" => $value->getCreator()->getUsername()
+            );
+        }
+        return new Response(json_encode($tab));
     }
 
     /**
-	 * @Route("/calendar/addEvent", name="addEvent")
-	 * @Template()
-	 */
+     * @Route("/calendar/addEvent", name="addEvent")
+     * @Template()
+     */
     public function addEventAction()
     {
-    	$request = $this->getRequest();
-		if($request->isXmlHttpRequest()) {
+        $request = $this->getRequest();
+        if($request->isXmlHttpRequest()) {
 
-			if (true === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
 
-		    	$event = new Event();
-			    $event->setStart($request->request->get('start'));
-			    $event->setEnd($request->request->get('end'));
-			    $event->setTitle($request->request->get('title'));
-			    $event->setValidate(false);
-			    $user = $this->getUser();
-			    $event->setCreator($user);
-			    $em = $this->getDoctrine()->getManager();
-			    $em->persist($event);
-			    $em->flush();
-			    return new Response("La réservation a été ajoutée avec succès !");
-			}
-			return new Response("Pour effectuer une réservation, vous devez vous connecter !");
-		}
-		return new Response();
+                //$start = date_create_from_format('D M d Y H:i:s e+', $request->request->get('start') );
+                //$end = date_create_from_format('D M d Y H:i:s e+', $request->request->get('end') );
+                $start = new \DateTime($request->request->get('start'),new \DateTimeZone("Europe/Paris"));
+                $end = new \DateTime($request->request->get('end'),new \DateTimeZone("Europe/Paris"));
+
+                if ($start < $end && new \DateTime() < $start)
+                {
+                    $event = new Event();
+                    $event->setStart($request->request->get('start'));
+                    $event->setEnd($request->request->get('end'));
+                    $event->setTitle($request->request->get('title'));
+                    $event->setValidate(false);
+                    $event->setRefused(false);
+                    $user = $this->getUser();
+                    $event->setCreator($user);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($event);
+                    $em->flush();
+                    return new Response("La réservation a été ajoutée avec succès !");
+                }
+                return new Response("Impossible d'effectuer une réservation dans le passé !");
+
+            }
+            return new Response("Pour effectuer une réservation, vous devez vous connecter !");
+        }
+        return new Response();
     }
 
     /**
-	 * @Route("/calendar/editEvent", name="editEvent")
-	 * @Template()
-	 */
+     * @Route("/calendar/editEvent", name="editEvent")
+     * @Template()
+     */
     public function editEventAction()
     {
-    	$request = $this->getRequest();
-		if($request->isXmlHttpRequest()) {
+        $request = $this->getRequest();
+        if ($request->isXmlHttpRequest()) {
 
-			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
-	    	$event = $repository->findOneById($request->request->get('eventID'));
-	    	if($event && (true === $this->get('security.context')->isGranted('IS_ADMIN') || $event->getCreator() == $this->getUser())) {
-	    		$event->setStart($request->request->get('start'));
-			    $event->setEnd($request->request->get('end'));
-			    $event->setTitle($request->request->get('title'));
-			    $event->setValidate(false);
+            $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+            $event = $repository->findOneById($request->request->get('eventID'));
+            if ($event && ($this->get('security.context')->isGranted('ROLE_ADMIN')
+                || ($event->getCreator() == $this->getUser()
+                    && new \DateTime() < new \DateTime($request->request->get('start'))
+                ))) {
 
-			    $em = $this->getDoctrine()->getManager();
-			    $em->persist($event);
-			    $em->flush();
-			    return new Response("Modification effectuée avec succès !");
-	    	}
-	    	return new Response("Vous ne pouvez pas modifier cet évent !");
-		}
-		return new Response("");
+                $event->setStart($request->request->get('start'));
+                $event->setEnd($request->request->get('end'));
+                $event->setTitle($request->request->get('title'));
+                $event->setValidate(false);
+                $event->setRefused(false);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                return new Response("Modification effectuée avec succès !");
+            }
+            return new Response("Vous ne pouvez pas modifier cet évent !");
+        }
+        return new Response("");
     }
 
 
     /**
-	 * @Route("/calendar/removeEvent", name="removeEvent")
-	 * @Template()
-	 */
+     * @Route("/calendar/removeEvent", name="removeEvent")
+     * @Template()
+     */
     public function removeEventAction()
     {
 
-    	$request = $this->getRequest();
-		if($request->isXmlHttpRequest()) {
+        $request = $this->getRequest();
+        if($request->isXmlHttpRequest()) {
 
-			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
-	    	$event = $repository->findOneById($request->request->get('eventID'));
-	    	if($event && (true === $this->get('security.context')->isGranted('IS_ADMIN') || $event->getCreator() == $this->getUser())) {
-	    		$em = $this->getDoctrine()->getManager();
-			    $em->remove($event);
-			    $em->flush();
-			    return new Response("La réservation a été supprimée avec succès !");
-	    	}
-	    	return new Response("Vous ne pouvez pas supprimer cet évenement !");
-		}
-		return new Response();
+            $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+            $event = $repository->findOneById($request->request->get('eventID'));
+            if($event && ($this->get('security.context')->isGranted('ROLE_ADMIN')
+                || $event->getCreator() == $this->getUser())) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($event);
+                $em->flush();
+                return new Response("La réservation a été supprimée avec succès !");
+            }
+            return new Response("Vous ne pouvez pas supprimer cet évenement !");
+        }
+        return new Response();
     }
 
 
     /**
-	 * @Route("/calendar/validateEvent", name="validateEvent")
-	 * @Template()
-	*/
+     * @Route("/calendar/validateEvent", name="validateEvent")
+     * @Template()
+    */
     public function validateEventAction()
     {
-    	$request = $this->getRequest();
-		if($request->isXmlHttpRequest()) {
+        $request = $this->getRequest();
+        if($request->isXmlHttpRequest()) {
 
-			$repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
-	    	$event = $repository->findOneById($request->request->get('eventID'));
-	    	if($event) {
-	    		$event->setValidate(true);
-	    		$em = $this->getDoctrine()->getManager();
-			    $em->persist($event);
-			    $em->flush();
-			    return new Response("La réservation a été validée avec succès !");
-	    	}
-		}
-		return new Response();
+            $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+            $event = $repository->findOneById($request->request->get('eventID'));
+            if($event) {
+                $event->setValidate(true);
+                $event->setRefused(false);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                return new Response("La réservation a été validée avec succès !");
+            }
+        }
+        return new Response();
     }
 
+    /**
+     * @Route("/calendar/refusedEvent", name="refusedEvent")
+     * @Template()
+    */
+    public function refusedeEventAction()
+    {
+        $request = $this->getRequest();
+        if($request->isXmlHttpRequest()) {
 
+            $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
+            $event = $repository->findOneById($request->request->get('eventID'));
+            if($event) {
+                $event->setValidate(false);
+                $event->setRefused(true);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($event);
+                $em->flush();
+                return new Response("La réservation a été refusée avec succès !");
+            }
+        }
+        return new Response();
+    }
 }

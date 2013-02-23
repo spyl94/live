@@ -8,6 +8,7 @@ $(document).ready(function() {
       timeslotsPerHour : 4,
       allowCalEventOverlap : true,
       overlapEventsSeparate: true,
+      use24Hour: true,
       firstDayOfWeek : 1,
       businessHours :{start: 10, end: 22, limitDisplay: true },
       daysToShow : 7,
@@ -44,18 +45,28 @@ $(document).ready(function() {
       },
       eventRender : function(calEvent, $event) {
          if (calEvent.end.getTime() < new Date().getTime()) {
-            $event.css("backgroundColor", "#aaa");
+            $event.addClass('past');
             $event.find(".wc-time").css({
                "backgroundColor" : "#999",
                "border" : "1px solid #888"
             });
          }
          if (calEvent.validate == true) {
-            $event.css("backgroundColor", "#32cd32");
+            $event.addClass('validate');
             $event.find(".wc-time").css({
                "backgroundColor" : "forestgreen",
                "border" : "1px solid darkgreen"
             });
+         }
+         if (calEvent.refused == true) {
+            $event.addClass('refused');
+            $event.find(".wc-time").css({
+               "backgroundColor" : "red",
+               "border" : "1px solid darkred"
+            });
+         }
+         if(calEvent.readOnly) {
+           $event.addClass('read-only');
          }
       },
       draggable : function(calEvent, $event) {
@@ -82,20 +93,20 @@ $(document).ready(function() {
                $('#calendar').weekCalendar("removeUnsavedEvents");
             },
             buttons: {
-               save : function() {
+               ajouter : function() {
                   calEvent.start = new Date(startField.val());
                   calEvent.end = new Date(endField.val());
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
 
-                   $.ajax({url:"http://live.spyl.net/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut(2000);$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                   $.ajax({url:"http://live.assos.efrei.fr/calendar/addEvent", type: "post", data:{start: calEvent.start, end:calEvent.end, title:calEvent.title},
+                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
 
                   $calendar.weekCalendar("removeUnsavedEvents");
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
-               cancel : function() {
+               annuler : function() {
                   $dialogContent.dialog("close");
                }
             }
@@ -106,12 +117,12 @@ $(document).ready(function() {
 
       },
       eventDrop : function(calEvent, $event) {
-          $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut(2000);$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+          $.ajax({url:"http://live.assos.efrei.fr/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title},
+                    success: function(msg){$("#message-info").show().empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
       },
       eventResize : function(calEvent, $event) {
-           $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut(2000);$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+           $.ajax({url:"http://live.assos.efrei.fr/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title},
+                    success: function(msg){$("#message-info").show().empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
       },
       eventClick : function(calEvent, $event) {
 
@@ -129,32 +140,31 @@ $(document).ready(function() {
 
          $dialogContent.dialog({
             modal: true,
-            title: "Edit - " + calEvent.title,
+            title: "Editer - " + calEvent.title,
             close: function() {
                $dialogContent.dialog("destroy");
                $dialogContent.hide();
                $('#calendar').weekCalendar("removeUnsavedEvents");
             },
             buttons: {
-               save : function() {
+               modifier : function() {
 
                   calEvent.start = new Date(startField.val());
                   calEvent.end = new Date(endField.val());
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
-                   $.ajax({url:"http://live.spyl.net/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut(2000);}, error: function(){$calendar.weekCalendar("refresh");}});
+                   $.ajax({url:"http://live.assos.efrei.fr/calendar/editEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title},
+                    success: function(msg){$("#message-info").show().empty().html(msg).show().delay(2000).fadeOut();}, error: function(){$calendar.weekCalendar("refresh");}});
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
-               "delete" : function(msg) {
-                   $.ajax({url:"http://live.spyl.net/calendar/removeEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title}, 
-                    success: function(msg){$("#message-info").show().empty().html(msg).fadeOut(2000);$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
-
+               "supprimer" : function(msg) {
+                   $.ajax({url:"http://live.assos.efrei.fr/calendar/removeEvent", type: "post", data:{eventID: calEvent.id, start: calEvent.start, end:calEvent.end, title:calEvent.title},
+                    success: function(msg){$("#message-info").show().empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
                   /*$calendar.weekCalendar("removeEvent", calEvent.id);*/
                   $dialogContent.dialog("close");
                },
-               cancel : function() {
+               annuler : function() {
                   $dialogContent.dialog("close");
                }
             }
@@ -175,7 +185,7 @@ $(document).ready(function() {
 
       },
       data: function(start, end, callback) {
-        $.getJSON("http://live.spyl.net/calendar/getEventData", {
+        $.getJSON("http://live.assos.efrei.fr/calendar/getEventData", {
            start: start.getTime(),
            end: end.getTime()
          },  function(result) {
