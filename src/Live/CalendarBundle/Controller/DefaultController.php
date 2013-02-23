@@ -168,7 +168,7 @@ class DefaultController extends Controller
      * @Route("/calendar/refusedEvent", name="refusedEvent")
      * @Template()
     */
-    public function refusedeEventAction()
+    public function refusedEventAction()
     {
         $request = $this->getRequest();
         if($request->isXmlHttpRequest()) {

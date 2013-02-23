@@ -1,6 +1,13 @@
 body {
 	font-size: 83.33%;
 }
+table.wc-time-slots {
+    cursor: pointer;
+}
+.wc-time-header-cell {
+	cursor: default !important;
+	background-color: #E6EEF1 !important;
+}
 
 .legende {
 	padding: 3px 50px 3px 50px;
@@ -44,19 +51,19 @@ td.wc-scrollbar-shim {
 h1 {
 	padding: 0.5em;
 	font-size: 1.6em;
-} 
+}
 
 h2 {
 	margin: 0.5em 0;
-	font-size: 1.4em;	
+	font-size: 1.4em;
 }
 
 p {
-	margin: 0.5em;	
+	margin: 0.5em;
 }
 
 .ui-widget {
-	font-size: 1em;	
+	font-size: 1em;
 }
 
 #event_edit_container, #about {
@@ -69,7 +76,7 @@ p {
 #about_button_container {
 	position: absolute;
 	top: 0em;
-	right: 0em;	
+	right: 0em;
 	padding: 0.5em 2em;
 	background: #ddf;
 	border: 1px solid #bbd;

@@ -81,7 +81,7 @@
         resizable: function(calEvent, element) {
           return true;
         },
-        eventClick: function(calEvent, element, dayFreeBusyManager, 
+        eventClick: function(calEvent, element, dayFreeBusyManager,
                                                       calendar, clickEvent) {
         },
         eventRender: function(calEvent, element) {
@@ -99,14 +99,14 @@
         },
         eventResize: function(calEvent, element) {
         },
-        eventNew: function(calEvent, element, dayFreeBusyManager, 
+        eventNew: function(calEvent, element, dayFreeBusyManager,
                                                     calendar, mouseupEvent) {
         },
         eventMouseover: function(calEvent, $event) {
         },
         eventMouseout: function(calEvent, $event) {
         },
-        eventDelete: function(calEvent, element, dayFreeBusyManager, 
+        eventDelete: function(calEvent, element, dayFreeBusyManager,
                                                       calendar, clickEvent) {
             calendar.weekCalendar('removeEvent',calEvent.id);
 	},
@@ -133,7 +133,7 @@
           }
         },
         eventBody: function(calEvent, calendar) {
-          return calEvent.title;
+          return calEvent.title + "<br> ~ " + calEvent.creator;
         },
         shortMonths: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
         longMonths: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
