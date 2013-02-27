@@ -20,7 +20,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="Entrez votre vrai prénom.", groups={"Profile"})
      * @Assert\MinLength(limit="2", message="Le prénom est trop court.", groups={"Profile"})
@@ -29,7 +29,7 @@ class User extends BaseUser
     protected $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="Entrez votre vrai nom.", groups={"Profile"})
      * @Assert\MinLength(limit="2", message="Le nom est trop court.", groups={"Profile"})
@@ -38,9 +38,7 @@ class User extends BaseUser
     protected $realname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\NotBlank(message="Entrez votre promo.", groups={"Profile"})
+     * @ORM\Column(type="string", length=255)
      */
     private $promo;
 
@@ -182,28 +180,5 @@ class User extends BaseUser
     public function getRealname()
     {
         return $this->realname;
-    }
-
-    /**
-     * Set promo
-     *
-     * @param string $promo
-     * @return User
-     */
-    public function setPromo($promo)
-    {
-        $this->promo = $promo;
-
-        return $this;
-    }
-
-    /**
-     * Get promo
-     *
-     * @return string
-     */
-    public function getPromo()
-    {
-        return $this->promo;
     }
 }

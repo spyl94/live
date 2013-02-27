@@ -4,6 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+
+    <services>
+
+        <service id="live_user.profile.form.type" class="Live\UserBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="live_user_profile" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+    </services>
     <!--
     <parameters>
         <parameter key="live_user.example.class">Live\UserBundle\Example</parameter>

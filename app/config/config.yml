@@ -39,6 +39,8 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
+        mapping_types:
+            enum: string
         driver:   "%database_driver%"
         host:     "%database_host%"
         port:     "%database_port%"
@@ -64,3 +66,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Live\UserBundle\Entity\User
+    profile:
+        form:
+            type: live_user_profile
