@@ -1,4 +1,19 @@
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+<div class="span7 well">
+    <div class="row">
+        <div class="span1">
+            <a href="#" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="">
+            </a>
+        </div>
+        <div class="span3">
+            <p>{{ user.username }}</p>
+            <p><strong>{{ user.firstname }} {{ user.realname }}</strong></p>
+            <span class=" badge badge-warning">{{ user.email }}</span> <span class=" badge badge-info">15 followers</span>
+        </div>
+        <div class="span3">
+            Guitare: <div class="star" data-score="1"></div>
+            Basse: <div class="star" data-score="1"></div>
+            Batterie: <div class="star" data-score="1"></div>
+            Synthé: <div class="star" data-score="1"></div>
+        </div>
+    </div>
 </div>

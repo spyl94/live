@@ -1,3 +1,8 @@
+live_blog:
+    resource: "@LiveBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 live_calendar:
     resource: "@LiveCalendarBundle/Controller/"
     type:     annotation
@@ -31,6 +36,7 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******

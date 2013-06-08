@@ -1,5 +1,24 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% set user = app.user %}
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#profile" data-toggle="tab">Profil</a></li>
+        <li><a href="#profile-edit" data-toggle="tab">Editer</a></li>
+         <li><a href="#password" data-toggle="tab">Mot de Passe</a></li>
+    </ul>
+     <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="profile">
+            {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+        </div>
+        <div class="tab-pane fade" id="profile-edit">
+            {% set form = edit %}
+            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        </div>
+        <div class="tab-pane fade" id="password">
+            {% set form = passwd %}
+            {% include "FOSUserBundle:ChangePassword:changePassword_content.html.twig" %}
+        </div>
+    </div>
+
 {% endblock fos_user_content %}

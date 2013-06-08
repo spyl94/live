@@ -3,13 +3,15 @@
 namespace Live\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
+//use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- */
+**/
 class User extends BaseUser
 {
     /**
@@ -22,18 +24,16 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(message="Entrez votre vrai prénom.", groups={"Profile"})
-     * @Assert\MinLength(limit="2", message="Le prénom est trop court.", groups={"Profile"})
-     * @Assert\MaxLength(limit="255", message="Le prénom est trop long.", groups={"Profile"})
+     * @Assert\NotBlank(message="Entrez votre prénom.", groups={"Profile"})
+     * @Assert\Length(min=2, max=255, minMessage="Le prénom est trop court.", maxMessage="Le prénom est trop long.", groups={"Profile"})
      */
     protected $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @Assert\NotBlank(message="Entrez votre vrai nom.", groups={"Profile"})
-     * @Assert\MinLength(limit="2", message="Le nom est trop court.", groups={"Profile"})
-     * @Assert\MaxLength(limit="255", message="Le nom est trop long.", groups={"Profile"})
+     * @Assert\NotBlank(message="Entrez votre nom.", groups={"Profile"})
+     * @Assert\Length(min=2, max=255, minMessage="Le nom est trop court.", maxMessage="Le nom est trop long.", groups={"Profile"})
      */
     protected $realname;
 
@@ -59,7 +59,6 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
     }
 
     /**

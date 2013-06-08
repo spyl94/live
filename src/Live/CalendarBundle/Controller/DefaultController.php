@@ -25,6 +25,7 @@ class DefaultController extends Controller
      */
     public function getEventDataAction()
     {
+
         $tab = array();
         $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
         $events = $repository->findAll();

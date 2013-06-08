@@ -56,7 +56,6 @@ class Event
      */
     private $refused;
 
-
     /**
      *
      * @ORM\ManyToOne(targetEntity="Live\UserBundle\Entity\User", inversedBy="events")
@@ -68,7 +67,7 @@ class Event
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,14 +83,14 @@ class Event
     public function setStart($start)
     {
         $this->start = $start;
-    
+
         return $this;
     }
 
     /**
      * Get start
      *
-     * @return string 
+     * @return string
      */
     public function getStart()
     {
@@ -107,14 +106,14 @@ class Event
     public function setEnd($end)
     {
         $this->end = $end;
-    
+
         return $this;
     }
 
     /**
      * Get end
      *
-     * @return string 
+     * @return string
      */
     public function getEnd()
     {
@@ -130,14 +129,14 @@ class Event
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -153,14 +152,14 @@ class Event
     public function setValidate($validate)
     {
         $this->validate = $validate;
-    
+
         return $this;
     }
 
     /**
      * Get validate
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getValidate()
     {
@@ -176,14 +175,14 @@ class Event
     public function setRefused($refused)
     {
         $this->refused = $refused;
-    
+
         return $this;
     }
 
     /**
      * Get refused
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getRefused()
     {
@@ -196,17 +195,16 @@ class Event
      * @param \Live\UserBundle\Entity\User $creator
      * @return Event
      */
-    public function setCreator(\Live\UserBundle\Entity\User $creator = null)
+    public function setCreator(\Live\UserBundle\Entity\User $creator)
     {
         $this->creator = $creator;
-    
         return $this;
     }
 
     /**
      * Get creator
      *
-     * @return \Live\UserBundle\Entity\User 
+     * @return \Live\UserBundle\Entity\User
      */
     public function getCreator()
     {

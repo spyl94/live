@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/about", name="about")
      * @Template()
      */
-    public function indexAction()
+    public function aboutAction()
     {
        return new RedirectResponse($this->generateUrl('calendar'));
     }
+
 }
 
 

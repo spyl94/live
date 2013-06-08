@@ -88,4 +88,27 @@ class Instrument
     {
         return $this->level;
     }
+
+    /**
+     * Set player
+     *
+     * @param \Live\UserBundle\Entity\User $player
+     * @return Instrument
+     */
+    public function setPlayer(\Live\UserBundle\Entity\User $player = null)
+    {
+        $this->player = $player;
+    
+        return $this;
+    }
+
+    /**
+     * Get player
+     *
+     * @return \Live\UserBundle\Entity\User 
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
 }

@@ -13,17 +13,5 @@
         </service>
 
     </services>
-    <!--
-    <parameters>
-        <parameter key="live_user.example.class">Live\UserBundle\Example</parameter>
-    </parameters>
 
-    <services>
-        <service id="live_user.example" class="%live_user.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
-    </services>
-    -->
 </container>

@@ -1,25 +1,21 @@
-{# src/Live/UserBundle/Resources/views/layout.html.twig #}
+{% extends "::base.html.twig" %}
 
-{% extends "LiveMainBundle::layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+{% include "LiveMainBundle::menu.html.twig" %}
+{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="container">
-            <div>
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                    <a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a>
-                {% endif %}
-            </div>
-
-            {% for key, message in app.session.getFlashes() %}
-            <div class="{{ key }}">
-                {{ message|trans({}, 'FOSUserBundle') }}
-            </div>
-            {% endfor %}
-
             <div>
                 {% block fos_user_content %}
                 {% endblock fos_user_content %}

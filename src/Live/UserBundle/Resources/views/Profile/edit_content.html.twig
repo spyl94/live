@@ -1,6 +1,42 @@
-
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
+
+    {% if form_errors(form) is not empty %}
+    <div class="control-group error">
+        <span class="help-inline">{{ form_errors(form) }}</span>
+    </div>
+    {% endif %}
+
+        <div class="control-group {% if form_errors(form.email) is not empty %}error{% endif %}">
+                {{ form_label(form.email, null, { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.email) }}
+                    <span class="help-inline">{{ form_errors(form.email) }}</span>
+                </div>
+        </div>
+        <div class="control-group {% if form_errors(form.firstname) is not empty %}error{% endif %}">
+                {{ form_label(form.firstname, null, { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                        {{ form_widget(form.firstname) }}
+                        <span class="help-inline">{{ form_errors(form.firstname) }}</span>
+                </div>
+        </div>
+        <div class="control-group {% if form_errors(form.realname) is not empty %}error{% endif %}">
+                {{ form_label(form.realname, null, { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                        {{ form_widget(form.realname) }}
+                        <span class="help-inline">{{ form_errors(form.realname) }}</span>
+                </div>
+        </div>
+        <div class="control-group {% if form_errors(form.promo) is not empty %}error{% endif %}">
+                {{ form_label(form.promo, null, { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                        {{ form_widget(form.promo) }}
+                        <span class="help-inline">{{ form_errors(form.promo) }}</span>
+                </div>
+        </div>
+
+    {{ form_rest(form) }}
+
     <div>
         <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
     </div>
