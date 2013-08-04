@@ -30,12 +30,22 @@ class User extends BaseUser
     protected $firstname;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(message="Entrez votre nom.", groups={"Profile"})
      * @Assert\Length(min=2, max=255, minMessage="Le nom est trop court.", maxMessage="Le nom est trop long.", groups={"Profile"})
      */
-    protected $realname;
+    protected $lastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true, name="facebookId")
+     *
+     */
+    protected $facebookId;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -46,7 +56,7 @@ class User extends BaseUser
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Live\CalendarBundle\Entity\Event", mappedBy="creator")
+     * @ORM\OneToMany(targetEntity="Live\UserBundle\Entity\Event", mappedBy="creator")
      */
     private $events;
 
@@ -59,6 +69,81 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function serialize()
+    {
+        return serialize(array($this->facebookId, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookId, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * Get the full name of the user (first + last name)
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+     /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+        $this->setUsername($facebookId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookId($fbdata['id']);
+            $this->addRole('ROLE_FACEBOOK');
+        }
+        if (isset($fbdata['first_name'])) {
+            $this->setFirstname($fbdata['first_name']);
+            $this->setUsername($fbdata['first_name']);
+        }
+        if (isset($fbdata['last_name'])) {
+            $this->setLastname($fbdata['last_name']);
+        }
+        if (isset($fbdata['email'])) {
+            $this->setEmail($fbdata['email']);
+        }
     }
 
     /**

@@ -1,0 +1,52 @@
+{% extends "LiveMainBundle::layout.html.twig" %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('bundles/livemain/js/jquery.jOrgChart.js') }}"></script>
+  <script>
+        $("#org").jOrgChart({
+            chartElement : '#chart'
+        });
+  </script>
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('bundles/livemain/css/jquery.jOrgChart.css') }}"/>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+  <h2 class="section-title">Notre Equipe</h2>
+
+  <ul id="org" style="display:none">
+    <li>
+      <strong>Bureau</strong> <img src="{{ asset('img/logo/live_efrei.logo.typo.150.png') }}" alt=""><br> 2013 - 2014
+      <ul>
+        <li><strong>Maxime Fabre</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Trésorier
+          <ul>
+            <li><strong>Sinan Esen</strong> <br> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable Evenements</li>
+            <li>- <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable Partenariats</li>
+          </ul>
+        </li>
+        <li><strong>Aurélien David</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Président
+          <ul>
+            <li><strong>Adrien Ramos</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> local / matériel</li>
+            <li><strong>Victor</strong> <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> membres</li>
+          </ul>
+        </li>
+        <li><strong>Anthony Manieca</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Secrétaire
+            <ul>
+              <li>- <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br>Responsable communication</li>
+              <li><strong>Rémi Jarasson</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> interne</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div id="chart"></div>
+
+</div>
+
+{% endblock %}

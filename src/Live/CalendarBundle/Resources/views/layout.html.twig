@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+
+{% block navbar %}
+{% include "LiveMainBundle::menu.html.twig" %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/reset.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery-ui-1.8.11.custom.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/jquery.weekcalendar.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/live.css') }}' />
+    <link rel='stylesheet' type='text/css' href='{{ asset('bundles/livecalendar/css/skins/default.css') }}' />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+    var AJAX_URLS = {
+        getEventData: '{{ path("getEventData") }}',
+        addEvent: '{{ path("addEvent") }}',
+        removeEvent: '{{ path("removeEvent") }}',
+        editEvent: '{{ path("editEvent") }}',
+        validateEvent: '{{ path("validateEvent") }}',
+        refusedEvent: '{{path("refusedEvent") }}'
+    };
+    </script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js'></script>
+    <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('js/jwerty.js') }}'></script>
+    <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
+    {% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script>
+    {% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
+    {% endif %}
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var $calendar = $('#calendar');
+        jwerty.key('q/←', function () {
+            $calendar.weekCalendar("prevWeek");
+        });
+        jwerty.key('d/→', function () {
+            $calendar.weekCalendar("nextWeek");
+        });
+        jwerty.key('z/↑', function () {
+            $calendar.weekCalendar("today");
+        });
+    });
+    </script>
+{% endblock %}

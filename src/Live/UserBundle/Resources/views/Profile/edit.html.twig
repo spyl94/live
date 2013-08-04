@@ -12,12 +12,10 @@
             {% include "FOSUserBundle:Profile:show_content.html.twig" %}
         </div>
         <div class="tab-pane fade" id="profile-edit">
-            {% set form = edit %}
             {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
         </div>
         <div class="tab-pane fade" id="password">
-            {% set form = passwd %}
-            {% include "FOSUserBundle:ChangePassword:changePassword_content.html.twig" %}
+            {% render(controller("FOSUserBundle:ChangePassword:changePassword")) %}
         </div>
     </div>
 

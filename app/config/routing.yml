@@ -37,6 +37,11 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
+_security_check:
+  pattern:  /login_facebook_check
+
+_security_logout:
+  pattern:  /logout
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******

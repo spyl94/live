@@ -34,6 +34,11 @@ body {
     background: linear-gradient(to bottom, #ffcc00,#fb9b00); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcc00', endColorstr='#fb9b00',GradientType=0 ); /* IE6-9 */
 }
+
+#menu-logo img {
+  margin-top: -15px;
+}
+
 #menu-container {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -45,40 +50,130 @@ body {
     padding: 0 0;
 }
 
-#menu-container ul li {
+#menu-container li {
     display: inline-block;
     float: left;
     box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(255, 255, 255, 0.3);
     border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
-#menu-container ul li:hover {
+#menu-container li:hover {
     background: white;
 }
-#menu-container ul li a {
+
+#menu-container li:hover a {
+    color: #ffcc00;
+}
+
+#menu-container li a {
   display: block;
   padding: 0 25px;
   color: #fff;
   text-decoration: none;
   line-height: 54px;
 }
-#menu-container ul li a:hover { color: #ffcc00; }
+
+#menu-container li a:hover { color: #ffcc00; }
+
+/**
+**/
+
+.main li:hover > ul {
+  display: block;
+}
+
+.main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+  position: absolute;
+  top: 54px;
+  z-index: 3000;
+  background: white;
+}
+
+#menu-container .main ul li {
+  float: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  -moz-box-shadow: 1px 1px 1px 0px #cfcfcf;
+  -webkit-box-shadow: 1px 1px 1px 0px #cfcfcf;
+  box-shadow: 1px 1px 1px 0px #cfcfcf;
+}
+/*
+#menu-container .main ul li:last-child {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}*/
+
+#menu-container .left ul a {
+  padding: 10px;
+  width: 222px;
+  line-height: 1;
+  display: block;
+  white-space: nowrap;
+  float: none;
+  color: black;
+}
+
+#menu-container .right ul a {
+  padding: 10px;
+  width: 225px;
+  line-height: 1;
+  display: block;
+  white-space: nowrap;
+  float: none;
+  color: black;
+}
+
+#menu-container #menu-user {
+  margin-left: -135px;
+}
+
+#menu-container .main ul a:hover {
+    color: #ffcc00;
+}
+
+/** fix box-shadow remove by background */
+#menu-container .main ul li:hover {
+    background: none;
+  }
+
+/**
+  Slider
+  **/
 
 #slider {
     display: block;
     height: 400px;
     background: black;
 }
-#slider #slider-effect {
-    display: block;
-    height: 400px;
-    background: transparent url('../img/slider-bg.png') 50% 100% no-repeat;
+
+#slider-bkg {
+  position: relative;
+  display: none;
+  background: black;
+  height: 400px;
+  margin-top: -480px;
+  z-index: -1;
+}
+
+
+/**
+  Title & Buttons
+  **/
+.container p {
+
+  text-align: justify;
 }
 h2 {
     -webkit-margin-before: 0.83em;
--webkit-margin-after: 0.83em;
--webkit-margin-start: 0px;
--webkit-margin-end: 0px;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
 
 h2.section-title {
@@ -90,6 +185,14 @@ h2.section-title {
     font-style: italic;
     color: #1a1a1a;
     border-bottom: 5px solid #e0e0e0;
+}
+
+h3.section-title {
+    margin: 0 0 15px;
+    font-size: 28px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
 .btn-action {
@@ -141,6 +244,9 @@ h2.section-title {
      background: #1a1a1a; /* Old browsers */
      color: white;
      height: auto;
+}
+#footer p {
+  text-align: center;
 }
 
 #facebook {
@@ -255,10 +361,17 @@ h2.section-title {
   list-style: none;
 }
 
-#slider-bkg {
-  display: none;
-  background: black;
-  margin-top: -400px;
-  height: 250px;
-  margin-bottom: 180px;
+.cercle {
+  background:#ffcc00;
+     background: -webkit-gradient(linear, left top, left bottom, from(#ffcc00), to(#fb9b00));
+   background: -webkit-linear-gradient(top, #ffcc00, #fb9b00);
+  border-radius:50%;
+}
+
+.cercle p {
+  padding: 60px 60px 60px 60px;
+}
+
+.fb-login-button {
+  width: 300px !important;
 }

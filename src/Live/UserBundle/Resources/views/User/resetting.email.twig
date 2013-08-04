@@ -1,0 +1,15 @@
+{% block subject %}Live Efrei - Demande de changement de mot de passe{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+Bonjour {{ user.username }} !
+
+Vous pouvez changer votre mot de passe en utilisant ce lien: {{ confirmationUrl }}
+
+Cordialement,
+Live Efrei
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% endblock %}

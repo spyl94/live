@@ -1,0 +1,53 @@
+/* Basic styling */
+/* Draw the lines */
+.jOrgChart .line {
+  height                : 20px;
+  width                 : 4px;
+}
+
+.jOrgChart .down {
+  background-color 		: #ffcc00;
+  margin 				: 0px auto;
+}
+
+.jOrgChart .top {
+  border-top          : 3px solid #ffcc00;
+}
+
+.jOrgChart .left {
+  border-right          : 2px solid #ffcc00;
+}
+
+.jOrgChart .right {
+  border-left           : 2px solid #ffcc00;
+}
+
+/* node cell */
+.jOrgChart td {
+  text-align            : center;
+  vertical-align        : top;
+  padding               : 0;
+}
+
+/* Custom node styling */
+.jOrgChart .node {
+  font-size: 14px;
+  background-color:  #ffcc00;
+  border-radius: 8px;
+  border: 5px solid white;
+  color: #F38630;
+  -moz-border-radius: 8px;
+  width: 160px;
+  height: 160px;
+  z-index: 10;
+  margin: 0 2px;
+  display: inline-block;
+  color: black;
+  background: -moz-linear-gradient(center top, #ffcc00, #f7c438 53%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, #ffcc00, #fb9b00); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffcc00,#fb9b00); /* Chrome10+,Safari5.1+ */
+}
+
+.node p {
+    padding     : 2px;
+}

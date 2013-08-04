@@ -1,6 +1,3 @@
-body {
-	font-size: 83.33%;
-}
 table.wc-time-slots {
     cursor: pointer;
 }
@@ -84,10 +81,6 @@ p {
 	text-align: center;
 }
 
-.wc-header td {
-/*	background: url(images/header-bg.png) repeat-x;*/
-}
-
 #event_edit_container label {
 	display: block;
 	margin-top: 1em;
@@ -126,9 +119,6 @@ ol.formatted li {
 }
 #switcher{float:left;}
 
-.navbar {
-	z-index: 2;
-}
 #message-info {
   z-index: 9999; position: fixed; text-align: center; margin-left: 25%; width: 50%; margin-top: 23px;
   padding: 8px 35px 8px 14px;

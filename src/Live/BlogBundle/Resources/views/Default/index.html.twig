@@ -1,0 +1,44 @@
+{% extends "LiveBlogBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="span8">
+      <h2 class="section-title">Articles Récents</h2>
+
+      {% for post in posts %}
+        {{ post.content }}
+      {% endfor %}
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, deserunt, asperiores, dignissimos unde soluta delectus ut corrupti nobis eos iste cupiditate perspiciatis ullam facilis voluptate repudiandae necessitatibus repellat at magnam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, ullam, repellendus dolore tempore magnam cum architecto minima dolor enim facilis ad distinctio repudiandae aliquid odit nisi deleniti cupiditate id perferendis.
+
+</p>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, deserunt, asperiores, dignissimos unde soluta delectus ut corrupti nobis eos iste cupiditate perspiciatis ullam facilis voluptate repudiandae necessitatibus repellat at magnam.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, ullam, repellendus dolore tempore magnam cum architecto minima dolor enim facilis ad distinctio repudiandae aliquid odit nisi deleniti cupiditate id perferendis.
+</p>
+    </div>
+
+    <div class="span4">
+      <h2 class="section-title">Devenez membre !</h2>
+      <p>
+         En devenant membre de l'association vous pourrez
+      <a href="{{ path('calendar') }}" class="btn-action">réserver le local</a> afin de répéter seul ou en groupe quand vous voulez 7 jours sur 7.
+      </p>
+      <p>
+      C'est également l'occasion pour toi Efreien de valider ta PAVE (obligatoire) simplement en
+      <a href="{{ path('calendar') }}" class="btn-action">donnant des cours</a> à d'autres membres !
+      </p>
+      <p>
+        Tu souhaites progresser dans un instrument en particulier ?
+      <a href="{{ path('calendar') }}" class="btn-action">Demande des cours !</a> <br>
+      </p>
+
+      <p>Alors qu'est ce tu attends ? :-)</p>
+        <a href="{{ path('calendar') }}" class="btn-action btn-big">Je veux m'inscrire !</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

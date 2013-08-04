@@ -1,0 +1,113 @@
+{% extends "LiveMainBundle::layout.html.twig" %}
+
+{% block body %}
+<div class="container">
+  <h2 class="section-title">Notre Local</h2>
+<ul class="thumbnails">
+  <li class="span8">
+    <a href="#" class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_001.jpg') }}" alt="">
+    </a>
+  </li>
+  <li class="span4">
+    <a href="#" class="thumbnail">
+       <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_012.jpg') }}" alt="">
+    </a>
+  </li>
+  <li class="span4">
+    <a href="{{ asset('img/local/LocalLiveEfrei_Alfo_005.jpg') }}" class="thumbnail">
+       <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_005.jpg') }}" alt="">
+    </a>
+  </li>
+</ul>
+<p>
+   Le local de l'association est un véritable studio d'enregistrement. Allume l'ampli et joue, c'est tout ce qui compte !
+  <a class="btn-action" href="{{ path('about_local') }}">En savoir plus...</a>
+</p>
+
+<h2 class="section-title">Matériel</h2>
+<p>Voici une liste du matériel de l'association.</p>
+<ul class="thumbnails">
+  <li class="span4">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Guitare</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span4">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Guitare</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span4">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Basse Cort Action Textured Walnut Satin</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span6">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Batterie</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span3">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Clavier Yamaha</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span3">
+    <div class="thumbnail">
+      <img src="{{ asset('img/local/LocalLiveEfrei_Alfo_015.jpg') }}" alt="">
+      <h3>Batterie</h3>
+      <p>Thumbnail caption...</p>
+    </div>
+  </li>
+  <li class="span3">
+    <p>mais aussi fjdsfjodsijf <br>fosdfjho</p>
+  </li>
+</ul>
+<p>
+
+</p>
+  <h2 class="section-title">Les cours</h2>
+
+  <div class="row">
+    <div class="span4">
+      <div class="cercle">
+        <p>« Chez Live EFREI, les cours sont <strong>à la demande</strong>, soit des profs, soit des élèves. C'est à chacun de trouver un moment dans la semaine (même le week-end) pour donner ces cours, dans <strong>la convivialité</strong>. »</p>
+      </div>
+    </div>
+      <div class="span4">
+        <h3 class="section-title">Pour les élèves :</h3>
+              <p>La cotisation d'adhésion à Live EFREI  d'une valeur de 20€ te permettra d'avoir des cours toute l'année. Ainsi, Live te permet d'avoir <strong>environ 20 heures</strong> de cours (de Décembre à Avril à peu près), bien moins cher qu'un professionnel (minimum 25€ / heure).</p>
+              <p>Notre but est que chacun des membres, <strong>peu importe ses ressources</strong>, puisse jouer d'un instrument. Nous donnons donc des cours de qualité suffisante pour te permettre de participer <strong>aux Boeufs / Jam Session</strong>, et pour que tu puisses monter ton groupe et jouer sur scène.</p>
+        </div>
+      <div class="span4">
+        <h3 class="section-title">Pour les profs :</h3>
+            <p>Si tu es musicien, et que ton niveau est suffisant, tu peux entrer chez Live EFREI en donnant des cours pour <strong>valider ta PAVE</strong>, ou simplement pour le plaisir de partager !</p>
+            <p>Pour cela, signale-toi sur le site en tant que professeur, en précisant le ou <strong>les instruments que tu veux enseigner</strong>, au début de l'année scolaire. C'est aux alentours de Novembre que tu pourras commencer à donner tes cours. </p>
+            <p>En accord avec le Responsable des Cours, ta PAVE sera validé à partir de <strong>20 heures</strong>.</p>
+      </div>
+  </div>
+
+  <h2 class="section-title">L'Association</h2>
+  <div class="row">
+    <div class="span6">
+        <p>L'association est composée de membres souhaitant faire bouger le campus en participant à un maximum d'évenements. Notre objectif est de promouvoir notre passion pour la musique et avant tout de vous faire prendre du plaisir.</p>
+          <a class="btn-action" href="{{ path('about_team') }}">Découvrir l'équipe !</a>
+    </div>
+    <div class="span6"><iframe src="http://player.vimeo.com/video/15530883" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+  </div>
+
+
+</div>
+
+{% endblock %}

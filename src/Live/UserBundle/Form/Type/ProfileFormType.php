@@ -21,7 +21,7 @@ class ProfileFormType extends BaseType
         $tabPromo[] = "P" . date('Y', strtotime('+ 5 year'));
 
         $builder->add('firstname', 'text',  array("label" => "Prénom :", "required" => false));
-        $builder->add('realname', 'text',  array("label" => "Nom :", "required" => false));
+        $builder->add('lastname', 'text',  array("label" => "Nom :", "required" => false));
         $builder->add('promo', 'choice', array("label" => "Promo :", "required" => false,
                                             'choices' => $tabPromo,
                                             'multiple' => false,

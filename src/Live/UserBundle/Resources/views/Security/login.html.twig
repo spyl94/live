@@ -3,11 +3,15 @@
 {% block fos_user_content %}
 
 <div class="row" style="margin-top: 100px;">
-    <div class="span4"><h2>Veuillez vous connecter:</h2></div>
+    <div class="span4">
+        <h2>Veuillez vous connecter :</h2>
+    </div>
     <div class="span4 content-form">
         {% if error %}
             <div class="control-group error"><span class="help-inline">{{ error|trans({}, 'FOSUserBundle') }} !</span></div>
         {% endif %}
+                <div style="margin-left: -65px">{{ facebook_login_button({'label' : 'Connexion avec Facebook', 'autologoutlink': false, 'size' : 'xlarge' }) }}</div>
+                <h3> Ou </h3>
         <form class="form-vertical" action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Entrez votre pseudo ou email" />
@@ -17,6 +21,7 @@
         </form>
         <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a>
     </div>
+    <div class="span3"><img src="{{ asset('img/logo/live_efrei.logo.icon.png') }}" alt=""></div>
 </div>
 
 {% include 'FOSUserBundle:Registration:register_content.html.twig' with  {'form' : registration } %}

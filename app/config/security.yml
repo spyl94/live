@@ -10,8 +10,13 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-       fos_userbundle:
+        chain_provider:
+            chain:
+                providers: [fos_userbundle, my_fos_facebook_provider]
+        fos_userbundle:
             id: fos_user.user_provider.username_email
+        my_fos_facebook_provider:
+            id: my.facebook.user
 
     firewalls:
         main:
@@ -21,6 +26,13 @@ security:
                 csrf_provider: form.csrf_provider
                 always_use_default_target_path: true
                 default_target_path: /calendar
+            fos_facebook:
+                app_url: "http://apps.facebook.com/liveefrei/"
+                server_url: "http://localhost/live/web/app_dev.php/"
+                login_path: /login
+                check_path: /login_facebook_check
+                default_target_path: /
+                provider: my_fos_facebook_provider
             logout:       true
             anonymous:    true
             remember_me:

@@ -18,17 +18,18 @@ class Instrument
     private $id;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('guitare', 'basse', 'batterie', 'piano')")
+     * @ORM\Column(type="string", nullable=true, columnDefinition="ENUM('guitare', 'basse', 'batterie', 'piano')")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $level;
 
     /**
      * @ORM\ManyToOne(targetEntity="Live\UserBundle\Entity\User", inversedBy="instruments")
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
      */
     private $player;
 

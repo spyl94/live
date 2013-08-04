@@ -16,7 +16,25 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-       return new RedirectResponse($this->generateUrl('calendar'));
+       return array();
+    }
+
+   /**
+     * @Route("/about/local", name="about_local")
+     * @Template()
+     */
+    public function localAction()
+    {
+       return array();
+    }
+
+    /**
+     * @Route("/about/team", name="about_team")
+     * @Template()
+     */
+    public function teamAction()
+    {
+       return array();
     }
 
 }

@@ -1,0 +1,42 @@
+﻿
+<div id="menu">
+  <div id="menu-container" class="container">
+    <ul class="main left">
+      <li id="menu-logo">
+        <a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" style="vertical-align:middle;"></a>
+      </li>
+      <li>
+        <a href="#">Catégories</a>
+        <ul>
+            <li><a href="#">Association</a></li>
+            <li><a href="#">Evenements</a></li>
+            <li><a href="#">Musique</a></li>
+        </ul>
+      </li>
+      <li><a href="{{ path('about') }}">A propos</a></li>
+    </ul>
+    <ul class="main right" style="float: right; position: relative; right: -1px;">
+      <li>
+        <a href="#">Suivez nous</a>
+        <ul id="menu-follow">
+           <li><a href="https://www.facebook.com/live.efrei">Facebook</a></li>
+          <li><a href="https://twitter.com/Live_EFREI">Twitter</a></li>
+        </ul>
+      </li>
+      <li>
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+          <a href="#">
+              <i class="icon-user"></i> {{ app.user.username }}
+          </a>
+          <ul id="menu-user">
+                <li><a href="{{ path('fos_user_profile_edit') }}">Profile</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+          </ul>
+          {% else %}
+              <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+          {% endif %}
+     </li>
+    </ul>
+  </div>
+</div>
+<div style="padding-top: 45px"></div>
