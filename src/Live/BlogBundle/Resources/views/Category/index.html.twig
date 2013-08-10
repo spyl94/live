@@ -1,20 +1,19 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
-    <h1>Category list</h1>
+{% block body %}
+<div class="container">
+    <h1>Liste des catégories</h1>
 
-    <table class="records_list">
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>#</th>
+                <th>Nom</th>
                 <th>Slug</th>
                 <th>Description</th>
-                <th>Content</th>
-                <th>Enabled</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Count</th>
+                <th>Activé</th>
+                <th>Création</th>
+                <th>Dernière modification</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,18 +24,16 @@
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.slug }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.content }}</td>
                 <td>{{ entity.enabled }}</td>
                 <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.count }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_category_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_category_show', { 'id': entity.id }) }}">Regarder</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_category_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_category_edit', { 'id': entity.id }) }}">Editer</a>
                     </li>
                 </ul>
                 </td>
@@ -44,12 +41,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('admin_category_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <a href="{{ path('admin_category_new') }}"><button class="btn btn-large btn-primary" type="button">Ajouter une nouvelle catégorie</button></a>
+</div>
     {% endblock %}

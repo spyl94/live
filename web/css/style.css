@@ -2,17 +2,27 @@
     Main
 **/
 
+/** Fix footer end of page **/
+html, body {
+  height: 100%;
+}
+
 body {
     font-size: 18px;
     line-height: 32px;
 }
 
-.container-fluid {
-    min-height: 800px;
+#wrap {
+  position: relative;
+  margin: 0 auto;
+  min-height: 100%;
 }
 
 #footer {
-    text-align: center;
+  text-align: center;
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
 }
 
 #menu {
@@ -165,10 +175,15 @@ body {
 /**
   Title & Buttons
   **/
-.container p {
 
+a:link {
+  text-decoration:none
+}
+
+.container p {
   text-align: justify;
 }
+
 h2 {
     -webkit-margin-before: 0.83em;
     -webkit-margin-after: 0.83em;
@@ -234,6 +249,42 @@ h3.section-title {
   -webkit-backface-visibility: hidden;
 }
 
+/**
+  Post
+
+**/
+
+.posts-container {
+
+}
+
+.border {
+  border-bottom: 1px solid #e0e0e0;
+}
+.post {
+  padding-bottom: 10px;
+}
+
+
+h2.post-title {
+  text-decoration: none!important;
+  color: black;
+  font-size: 36px;
+}
+
+h2.post-title:hover {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+#author-category-date {
+  margin-top: -10px;
+  padding-bottom: 20px;
+  color: #999999;
+  font-size: 16px;
+  height: 25px;
+  line-height: 25px;
+}
 
 /**
  Footer
@@ -306,6 +357,9 @@ h3.section-title {
     background: #4099FF url('../img/bootstrap-32.png') no-repeat center center;
 }
 
+.popover {
+  color: black;
+}
 
 /** Form
 **/
@@ -318,7 +372,33 @@ h3.section-title {
     border-radius: 10px;
 }
 
-.btn-submit {
+.content-form input {
+  width: 80%;
+  padding: 9px 12px 10px 32px;
+}
+.content-form a {
+  color: grey;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.content-form ul {
+  list-style: none;
+}
+.form-horizontal .control-group {
+  margin-bottom: 10px;
+}
+
+#fos_user_registration_form_username, #username {
+  background:#eaedf2 url('../img/login/user.png') 10px 13px no-repeat;
+}
+#fos_user_registration_form_email {
+  background:#eaedf2 url('../img/login/email.png') 10px 15px no-repeat;
+}
+.content-form input[type="password"] {
+  background:#eaedf2 url('../img/login/password.png') 10px 10px no-repeat;
+}
+
+.content-form .btn-submit {
   font-size: 16px;
   border: none;
   background: orange;
@@ -339,27 +419,18 @@ h3.section-title {
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
 }
+
 .btn-submit:hover {
   background: #EE9A49;
   color: #ffffff;
 }
 
-#_submit {
+#_submit input {
   width: 90%;
   height: 50px;
+  padding: 0 0 0 0;
 }
-.content-form input {
-  width: 90%;
-  height: 30px;
-}
-.content-form a {
-  color: grey;
-  font-size: 12px;
-  text-decoration: underline;
-}
-.content-form ul {
-  list-style: none;
-}
+
 
 .cercle {
   background:#ffcc00;
@@ -372,6 +443,33 @@ h3.section-title {
   padding: 60px 60px 60px 60px;
 }
 
-.fb-login-button {
-  width: 300px !important;
+/***
+  Bulle
+**/
+
+.bulle {
+  position: relative;
+  background-color: #eee;
+}
+
+.bulle:after {
+  left: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.bulle:after {
+  border-left-color: #eee;
+  border-width: 15px;
+  top: 50%;
+  margin-top: -30px;
+}
+
+.bulle h2 {
+  padding: 5px 10px 5px 10px;
+  font-size: 20px;
 }

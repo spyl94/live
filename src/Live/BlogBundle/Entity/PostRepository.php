@@ -3,6 +3,7 @@
 namespace Live\BlogBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * PostRepository
@@ -12,4 +13,64 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+	/**
+     * Get Posts
+     *
+     * @param int $nombreParPage : le nombre de posts par page
+     * @param int $page : la page courante
+     * @return Paginator
+     */
+	  public function getPosts($nombreParPage, $page)
+	  {
+
+	    if ($page < 1) {
+	      throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+	    }
+
+	    $query = $this->createQueryBuilder('a')
+	                  ->leftJoin('a.categories', 'cat')
+	                    ->addSelect('cat')
+	                  ->orderBy('a.createdAt', 'DESC')
+	                  ->getQuery();
+
+	    $query->setFirstResult(($page-1) * $nombreParPage)
+	          ->setMaxResults($nombreParPage);
+
+	    return new Paginator($query);
+	  }
+
+    public function findByCategory($category, $nombreParPage, $page)
+    {
+      if ($page < 1) {
+        throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+      }
+
+        $qb = $this->createQueryBuilder("p");
+        $query = $qb
+              ->join('p.categories', 'c')
+              ->where($qb->expr()->in('c.id', $category->getId()))
+              ->getQuery();
+
+        $query->setFirstResult(($page-1) * $nombreParPage)
+            ->setMaxResults($nombreParPage);
+
+        return new Paginator($query);
+    }
+
+    public function findByTag($tag, $nombreParPage, $page)
+    {
+      if ($page < 1) {
+        throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
+      }
+        $qb = $this->createQueryBuilder("p");
+        $query = $qb
+              ->join('p.tags', 't')
+              ->where($qb->expr()->in('t.id', $tag->getId()))
+              ->getQuery();
+
+        $query->setFirstResult(($page-1) * $nombreParPage)
+            ->setMaxResults($nombreParPage);
+
+        return new Paginator($query);
+    }
 }

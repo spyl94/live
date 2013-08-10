@@ -11,14 +11,64 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('contentFormatter')
-            ->add('enabled')
-            ->add('publicationDateStart')
-            ->add('commentsEnabled')
-            ->add('categories')
-            ->add('tags')
+            ->add('title', 'text', array(
+                'attr' => array(
+                    'class' => 'input-block-level'
+                ),
+                'label' => 'Titre'
+                ))
+            ->add('content', 'textarea', array(
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'style' => 'height: 400px',
+                    'data-theme' => 'advanced'
+                ),
+                'label' => 'Contenu'
+                ))
+            ->add('enabled', 'checkbox', array(
+                'label' => 'Visible',
+                'required' => false
+                ))
+            ->add('publicationDateStart', 'genemu_jquerydate', array(
+                'widget' => 'single_text',
+                'label' => 'Date de publication'
+                ))
+            ->add('commentsEnabled', 'checkbox', array(
+                'label' => 'Commentaires autorisés',
+                'required' => false
+                ))
+            ->add('categoriesAdded', 'collection', array(
+                    'type' => new CategoryType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'required' => false,
+                    'label' => '',
+                    'options'  => array(
+                        'required'  => true,
+                        'attr'      => array('class' => 'cat-add')
+                    ),
+                ))
+            ->add('categories', 'entity', array(
+                    'class' => 'Live\BlogBundle\Entity\Category',
+                    'property' => 'name',
+                    'label' => 'Categories',
+                    'required' => false,
+                    'multiple' => true,
+                    'attr'  => array(
+                        'class'  => 'span4',
+                    ),
+                ))
+            ->add('tags', 'entity', array(
+                    'class' => 'Live\BlogBundle\Entity\Tag',
+                    'property' => 'name',
+                    'label' => 'Tags',
+                    'required' => false,
+                    'multiple' => true,
+                    'attr'  => array(
+                        'class'  => 'span4',
+                    ),
+                ))
         ;
     }
 

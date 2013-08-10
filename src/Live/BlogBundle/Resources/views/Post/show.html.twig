@@ -1,12 +1,13 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
 {% block body -%}
-    <h1>Post</h1>
+<div class="container">
+    <h1>Article</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
@@ -55,20 +56,21 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_post') }}">
-            Back to the list
+            Retour à la liste des actions
         </a>
     </li>
     <li>
         <a href="{{ path('admin_post_edit', { 'id': entity.id }) }}">
-            Edit
+            Editer
         </a>
     </li>
     <li>
         <form action="{{ path('admin_post_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" class="btn btn-danger">Supprimer (définitivement)</button>
         </form>
     </li>
 </ul>
+</div>
 {% endblock %}

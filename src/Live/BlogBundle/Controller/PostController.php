@@ -8,21 +8,42 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Live\BlogBundle\Entity\Post;
+use Live\BlogBundle\Entity\Category;
 use Live\BlogBundle\Form\PostType;
 use Live\BlogBundle\Form\PostEditType;
 
 /**
  * Post controller.
  *
- * @Route("/admin/post")
  */
 class PostController extends Controller
 {
 
     /**
+     * Finds and displays a Post entity.
+     *
+     * @Route("/posts/{slug}", name="post_show")
+     * @Template()
+     */
+    public function viewAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository('LiveBlogBundle:Post')->findOneBySlug($slug);
+
+        if (!$post) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
+        }
+
+        return array(
+            'post'      => $post
+        );
+    }
+
+    /**
      * Lists all Post entities.
      *
-     * @Route("/", name="admin_post")
+     * @Route("/admin/post", name="admin_post")
      * @Method("GET")
      * @Template()
      */
@@ -39,18 +60,23 @@ class PostController extends Controller
     /**
      * Creates a new Post entity.
      *
-     * @Route("/", name="admin_post_create")
+     * @Route("/admin/post", name="admin_post_create")
      * @Method("POST")
      * @Template("LiveBlogBundle:Post:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity  = new Post();
+
         $form = $this->createForm(new PostType(), $entity);
+
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $entity->setAuthor($this->getUser());
+
             $em->persist($entity);
             $em->flush();
 
@@ -66,7 +92,7 @@ class PostController extends Controller
     /**
      * Displays a form to create a new Post entity.
      *
-     * @Route("/new", name="admin_post_new")
+     * @Route("/admin/post/new", name="admin_post_new")
      * @Method("GET")
      * @Template()
      */
@@ -84,7 +110,7 @@ class PostController extends Controller
     /**
      * Finds and displays a Post entity.
      *
-     * @Route("/{id}", name="admin_post_show")
+     * @Route("/admin/post/{id}", name="admin_post_show")
      * @Method("GET")
      * @Template()
      */
@@ -109,7 +135,7 @@ class PostController extends Controller
     /**
      * Displays a form to edit an existing Post entity.
      *
-     * @Route("/{id}/edit", name="admin_post_edit")
+     * @Route("/admin/post/{id}/edit", name="admin_post_edit")
      * @Method("GET")
      * @Template()
      */
@@ -136,7 +162,7 @@ class PostController extends Controller
     /**
      * Edits an existing Post entity.
      *
-     * @Route("/{id}", name="admin_post_update")
+     * @Route("/admin/post/{id}", name="admin_post_update")
      * @Method("PUT")
      * @Template("LiveBlogBundle:Post:edit.html.twig")
      */
@@ -151,7 +177,7 @@ class PostController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new PostType(), $entity);
+        $editForm = $this->createForm(new PostEditType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -170,7 +196,7 @@ class PostController extends Controller
     /**
      * Deletes a Post entity.
      *
-     * @Route("/{id}", name="admin_post_delete")
+     * @Route("/admin/post/{id}", name="admin_post_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

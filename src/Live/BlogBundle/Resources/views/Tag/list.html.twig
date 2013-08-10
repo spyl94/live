@@ -1,0 +1,4 @@
+{% for tag in tags %}
+          <a class="btn-action" href="{{ path('tag_show', {'slug' : tag.slug }) }}">{{ tag.name }}</a>
+      {% else %} Aucun mot clé pour le moment !
+{% endfor %}

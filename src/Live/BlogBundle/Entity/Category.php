@@ -4,6 +4,7 @@ namespace Live\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
@@ -34,7 +35,8 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -44,13 +46,6 @@ class Category
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="content", type="text")
-     */
-    private $content;
 
     /**
      * @var boolean
@@ -79,6 +74,13 @@ class Category
      * @ORM\Column(name="count", type="integer")
      */
     private $count;
+
+    public function __construct()
+    {
+        $this->setEnabled(true);
+        $this->setCount(0);
+        $this->setDescription("Default");
+    }
 
     public function __toString()
     {
@@ -122,7 +124,6 @@ class Category
     public function setName($name)
     {
         $this->name = $name;
-        $this->setSlug($name);
 
         return $this;
     }
@@ -145,7 +146,7 @@ class Category
      */
     public function setSlug($slug)
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = $slug;
 
         return $this;
     }
@@ -181,29 +182,6 @@ class Category
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Category
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**

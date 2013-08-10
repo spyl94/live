@@ -1,0 +1,19 @@
+  <div class="pagination pagination-centered">
+    <ul>
+      {% if page - 1 <= 0 %}
+        <li class="disabled" ><a href="#">«</a></li>
+      {% else %}
+        <li><a rel="previous" href="{{ path('index', {'page': page - 1 }) }}">«</a></li>
+      {% endif %}
+      {% for p in range(1, nombrePage) %}
+        <li {% if p == page %} class="active" {% endif %} >
+          <a href="{{ path('index', {'page': p}) }}">{{ p }}</a>
+        </li>
+      {% endfor %}
+      {% if page + 1 > nombrePage %}
+        <li class="disabled" ><a href="#">»</a></li>
+      {% else %}
+        <li><a rel="next" href="{{ path('index', {'page': page + 1 }) }}">»</a></li>
+      {% endif %}
+    </ul>
+  </div>

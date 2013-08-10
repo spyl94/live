@@ -268,4 +268,27 @@ class Comment
     {
         return $this->status;
     }
+
+    /**
+     * Set post
+     *
+     * @param \Live\BlogBundle\Entity\Post $post
+     * @return Comment
+     */
+    public function setPost(\Live\BlogBundle\Entity\Post $post)
+    {
+        $this->post = $post;
+    
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return \Live\BlogBundle\Entity\Post 
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
 }

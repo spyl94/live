@@ -57,6 +57,13 @@ class Tag
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+
+        $this->setEnabled(true);
+
+    }
+
     public function __toString()
     {
         return $this->name;

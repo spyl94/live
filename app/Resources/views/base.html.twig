@@ -11,59 +11,89 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
         {% endblock %}
+
     </head>
     <body>
-        {% block navbar %}{% endblock %}
-        {% block body %}{% endblock %}
+        <div id="wrap">
 
-        <!-- end block body -->
-        {% block footer %}
-        {% include 'LiveMainBundle::footer.html.twig' %}
-        {% endblock %}
+            {% block navbar %}{% endblock %} <!-- end block navbar -->
 
+            {% block body %}{% endblock %} <!-- end block body -->
+
+            <br><br><br>
+
+            {% block footer %}
+                {% include 'LiveMainBundle::footer.html.twig' %}
+            {% endblock %} <!-- end block footer -->
+
+        </div>
 
         {% block javascripts %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.raty.js') }}"></script>
-        <script>
-        $.each($('.star'), function( key, value ) {
-          $(value).raty({
-            score: function() {
-              return $(this).attr('data-score');
-            }
-          });
-        });
-        </script>
-        {% endblock %}
-        <script>
-            function goLogIn(){
-                window.location.href = "{{ path('_security_check') }}";
-            }
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.raty.js') }}"></script>
 
-            function onFbInit() {
-                if (typeof(FB) != 'undefined' && FB != null ) {
-                    FB.Event.subscribe('auth.statusChange', function(response) {
-                        if (response.session || response.authResponse) {
-                            setTimeout(goLogIn, 500);
-                        } else {
-                            window.location.href = "{{ path('_security_logout') }}";
-                        }
-                    });
+            <!-- Some scripts -->
+            <script>
+            $.each($('.star'), function( key, value ) {
+              $(value).raty({
+                score: function() {
+                  return $(this).attr('data-score');
                 }
-            }
-        </script>
-        {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+              });
+            });
 
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-37800574-1']);
-          _gaq.push(['_trackPageview']);
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        </script>
+            $(document).ready(function() {
+                $("[data-toggle='popover']").popover({placement:'top', trigger:'hover'});
+            });
+            </script>
+
+        {% endblock %}
+
+            <!-- Facebook Connect -->
+            <script>
+                function goLogIn() {
+                    window.location.href = "{{ path('_security_check') }}";
+                }
+
+                function onFbInit() {
+                    if (typeof(FB) != 'undefined' && FB != null ) {
+
+                        $('#facebook-login').on('click', function(e) {
+                            FB.login(function(response) {
+                                if (response.authResponse) {
+                                    setTimeout(goLogIn, 500);
+                                }
+                             }, {scope: 'email'});
+                            e.preventDefault();
+                        });
+
+                        $('#facebook-logout').on('click', function(e) {
+                            FB.logout(null);
+                        });
+
+                        FB.Event.subscribe('auth.statusChange', function(response) {
+                            if (response.session || response.authResponse) {
+                                setTimeout(goLogIn, 500);
+                            } else {
+                                window.location.href = "{{ path('_security_logout') }}";
+                            }
+                        });
+                    }
+                }
+            </script>
+            {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+
+            <!-- Google Analytics -->
+            <script type="text/javascript">
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', 'UA-37800574-1']);
+              _gaq.push(['_trackPageview']);
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+            </script>
     </body>
 </html>

@@ -1,20 +1,102 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
-    <h1>Post creation</h1>
+{% block body %}
+    <div class="container">
+    <h1>Ajouter un article</h1>
 
-    <form action="{{ path('admin_post_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+    <form action="{{ path('admin_post_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+
+<div class="row">
+    <div class="span8">
+        <div>
+          {{ form_label(form.title) }}
+          {{ form_errors(form.title) }}
+          {{ form_widget(form.title) }}
+        </div>
+        <div>
+          {{ form_label(form.content) }}
+          {{ form_errors(form.content) }}
+          {{ form_widget(form.content) }}
+        </div>
+    </div>
+    <div class="span4">
+        <div>
+          <label for="{{ form.enabled.vars.id }}" class="checkbox">{{ form_widget(form.enabled) }}{{ form.enabled.vars.label }}</label>
+        </div>
+        <div>
+          <label for="{{ form.commentsEnabled.vars.id }}" class="checkbox">{{ form_widget(form.commentsEnabled) }}{{ form.commentsEnabled.vars.label }}</label>
+        </div>
+        <div>
+          {{ form_label(form.publicationDateStart) }}
+          {{ form_widget(form.publicationDateStart) }}
+        </div>
+        <div>
+          {{ form_label(form.categories) }}
+          {{ form_widget(form.categories) }}
+        </div>
+        <div class="categories" data-prototype="{{ form_widget(form.categoriesAdded.vars.prototype)|e }}">
+              {% for cat in form.categoriesAdded %}
+                  <div>{{ form_row(cat.name) }}</div>
+              {% endfor %}
+        </div>
+        <div>
+          {{ form_label(form.tags) }}
+          {{ form_widget(form.tags) }}
+        </div>
+    </div>
+</div>
+<div style="display:none">{{ form_rest(form) }}</div>
+        <br>
         <p>
-            <button type="submit">Create</button>
+            <button type="submit" class="btn btn-primary btn-large">Valider</button>
+            <a href="{{ path('admin_post') }}"><button class="btn btn-large" type="button">Retour à la liste des actions</button></a>
         </p>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_post') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+    <script>
+      jQuery(document).ready(function() {
+
+        // Ajout des Catégories
+        var $lastFormAdded = null;
+        function addCatForm(collectionHolder, $newLinkLi) {
+
+          var prototype = collectionHolder.attr('data-prototype');
+
+          // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+          // la longueur de la collection courante
+          var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+          // Affiche le formulaire dans la page dans un li, avant le lien "ajouter un tag"
+          //var $newFormLi = $('<li></li>').append(newForm);
+          $newLinkLi.before(newForm);
+          $lastFormAdded = newForm;
+        }
+        var collectionHolder = $('.categories');
+        var $addCatLink = $('<a href="#" class="add_cat_link">Ajouter une catégorie supplémentaire</a>');
+        collectionHolder.append($addCatLink);
+        $addCatLink.on('click', function(e) {
+          e.preventDefault();
+          addCatForm(collectionHolder, $addCatLink);
+        });
+
+        // Select2
+        $('#live_blogbundle_posttype_categories').select2({
+                placeholder: "Choisissez une ou plusieurs catégorie(s)",
+                allowClear: true
+            });
+        $('#live_blogbundle_posttype_tags').select2({
+                placeholder: "Choisissez un ou plusieurs tag(s)",
+                allowClear: true
+            });
+
+      });
+    </script>
+
 {% endblock %}

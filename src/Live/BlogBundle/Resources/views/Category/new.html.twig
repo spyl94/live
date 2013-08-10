@@ -1,20 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
-    <h1>Category creation</h1>
+{% block body %}
+<div class="container">
+    <h1>Création d'une catégorie</h1>
 
     <form action="{{ path('admin_category_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
-            <button type="submit">Create</button>
+            <button type="submit" class="btn btn-primary btn-large">Créer</button>
+             <a href="{{ path('admin_category') }}"><button class="btn btn-large" type="button">Retour à la liste des actions</button></a>
         </p>
     </form>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_category') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+</div>
 {% endblock %}

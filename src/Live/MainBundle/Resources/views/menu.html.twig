@@ -8,9 +8,9 @@
       <li>
         <a href="#">Catégories</a>
         <ul>
-            <li><a href="#">Association</a></li>
-            <li><a href="#">Evenements</a></li>
-            <li><a href="#">Musique</a></li>
+            <li><a href="{{ path('category_show', {'slug' : 'association' }) }}">Association</a></li>
+            <li><a href="{{ path('category_show', {'slug' : 'evenements' }) }}">Evenements</a></li>
+            <li><a href="{{ path('category_show', {'slug' : 'musique' }) }}">Musique</a></li>
         </ul>
       </li>
       <li><a href="{{ path('about') }}">A propos</a></li>
@@ -26,10 +26,11 @@
       <li>
           {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
           <a href="#">
-              <i class="icon-user"></i> {{ app.user.username }}
+              <i class="icon-user" style="margin-top: 4px"></i> {{ app.user.username }}
           </a>
           <ul id="menu-user">
                 <li><a href="{{ path('fos_user_profile_edit') }}">Profile</a></li>
+                <li><a href="{{ path('calendar') }}">Réserver le local</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
           </ul>
           {% else %}

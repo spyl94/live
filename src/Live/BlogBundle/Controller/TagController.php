@@ -13,15 +13,41 @@ use Live\BlogBundle\Form\TagType;
 /**
  * Tag controller.
  *
- * @Route("/admin/tag")
  */
 class TagController extends Controller
 {
 
     /**
+     * Finds and displays Post entities according to the tag.
+     *
+     * @Route("/tags/{slug}/{page}", requirements={"page" = "\d+"}, defaults={"page" = 1}, name="tag_show")
+     * @Template()
+     */
+    public function viewAction($slug, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tag = $em->getRepository('LiveBlogBundle:Tag')->findOneBySlug($slug);
+
+        if (!$tag) {
+            throw $this->createNotFoundException('Unable to find Tag entity.');
+        }
+
+        $posts = $em->getRepository('LiveBlogBundle:Post')->findByTag($tag, 3, $page);
+
+        return array(
+            'tag'  => $tag,
+            'posts' => $posts,
+            'page'  => $page,
+            'nombrePage' => ceil(count($posts)/3)
+        );
+
+    }
+
+    /**
      * Lists all Tag entities.
      *
-     * @Route("/", name="admin_tag")
+     * @Route("/admin/tag/", name="admin_tag")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +64,7 @@ class TagController extends Controller
     /**
      * Creates a new Tag entity.
      *
-     * @Route("/", name="admin_tag_create")
+     * @Route("/admin/tag/", name="admin_tag_create")
      * @Method("POST")
      * @Template("LiveBlogBundle:Tag:new.html.twig")
      */
@@ -65,7 +91,7 @@ class TagController extends Controller
     /**
      * Displays a form to create a new Tag entity.
      *
-     * @Route("/new", name="admin_tag_new")
+     * @Route("/admin/tag/new", name="admin_tag_new")
      * @Method("GET")
      * @Template()
      */
@@ -83,7 +109,7 @@ class TagController extends Controller
     /**
      * Finds and displays a Tag entity.
      *
-     * @Route("/{id}", name="admin_tag_show")
+     * @Route("/admin/tag/{id}", name="admin_tag_show")
      * @Method("GET")
      * @Template()
      */
@@ -108,7 +134,7 @@ class TagController extends Controller
     /**
      * Displays a form to edit an existing Tag entity.
      *
-     * @Route("/{id}/edit", name="admin_tag_edit")
+     * @Route("/admin/tag/{id}/edit", name="admin_tag_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,7 +161,7 @@ class TagController extends Controller
     /**
      * Edits an existing Tag entity.
      *
-     * @Route("/{id}", name="admin_tag_update")
+     * @Route("/admin/tag/{id}", name="admin_tag_update")
      * @Method("PUT")
      * @Template("LiveBlogBundle:Tag:edit.html.twig")
      */
@@ -169,7 +195,7 @@ class TagController extends Controller
     /**
      * Deletes a Tag entity.
      *
-     * @Route("/{id}", name="admin_tag_delete")
+     * @Route("/admin/tag/{id}", name="admin_tag_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

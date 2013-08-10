@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('select2/select2.css') }}" type="text/css" />
+    <link href="{{ asset('jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+            {{ parent() }}
+            <!-- Select2 -->
+            <script src="{{ asset('select2/select2.min.js') }}"></script>
+            <script src="{{ asset('select2/select2_locale_fr.js') }}"></script>
+            <!-- jQuery Ui -->
+            <script src="{{ asset('jquery-ui/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+
+            <!-- TinyMce -->
+             {{ tinymce_init() }}
+{% endblock %}
+
+{% block navbar %}
+  {% include "LiveMainBundle::menu.html.twig" %}
+{% endblock %}

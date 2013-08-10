@@ -1,17 +1,20 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
-    <h1>Tag list</h1>
+{% block body %}
 
-    <table class="records_list">
+    <div class="container">
+        <h1>Liste des Tags</h1>
+
+
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Enabled</th>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Activé</th>
                 <th>Slug</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
+                <th>Création</th>
+                <th>Dernière modification</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,10 +30,7 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('admin_tag_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_tag_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_tag_edit', { 'id': entity.id }) }}">Editer</a>
                     </li>
                 </ul>
                 </td>
@@ -38,12 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('admin_tag_new') }}"><button class="btn btn-large btn-primary" type="button">Ajouter un nouveau tag</button></a>
 
-        <ul>
-        <li>
-            <a href="{{ path('admin_tag_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    </div>
     {% endblock %}

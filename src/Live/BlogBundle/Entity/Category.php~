@@ -80,6 +80,11 @@ class Category
      */
     private $count;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @ORM\prePersist
      */

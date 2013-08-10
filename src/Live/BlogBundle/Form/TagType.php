@@ -12,10 +12,10 @@ class TagType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('enabled')
-            ->add('slug')
-            ->add('createdAt')
-            ->add('updatedAt')
+            //->add('enabled')
+            //->add('slug')
+            //->add('createdAt')
+            //->add('updatedAt')
         ;
     }
 

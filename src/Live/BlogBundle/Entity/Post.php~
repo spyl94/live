@@ -5,6 +5,7 @@ namespace Live\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Live\UserBundle\Entity\User as User;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Post
@@ -35,7 +36,8 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -122,8 +124,11 @@ class Post
        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
 
        // Defaults
+       $this->setContentFormatter("tinymce");
        $this->setEnabled(true);
+       $this->setCommentsEnabled(true);
        $this->setPublicationDateStart(new \DateTime);
+       $this->setCommentsCount(0);
     }
 
     /**
@@ -166,7 +171,6 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->setSlug($title);
 
         return $this;
     }
@@ -189,7 +193,7 @@ class Post
      */
     public function setSlug($slug)
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = $slug;
 
         return $this;
     }
@@ -386,5 +390,127 @@ class Post
     public function getCommentsCount()
     {
         return $this->commentsCount;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Live\UserBundle\Entity\User $author
+     * @return Post
+     */
+    public function setAuthor(\Live\UserBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Live\UserBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Live\BlogBundle\Entity\Category $categories
+     * @return Post
+     */
+    public function addCategorie(\Live\BlogBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Live\BlogBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Live\BlogBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Live\BlogBundle\Entity\Tag $tags
+     * @return Post
+     */
+    public function addTag(\Live\BlogBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Live\BlogBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Live\BlogBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Live\BlogBundle\Entity\Comment $comments
+     * @return Post
+     */
+    public function addComment(\Live\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Live\BlogBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Live\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

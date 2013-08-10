@@ -56,7 +56,7 @@ class User extends BaseUser
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Live\UserBundle\Entity\Event", mappedBy="creator")
+     * @ORM\OneToMany(targetEntity="Live\CalendarBundle\Entity\Event", mappedBy="creator")
      */
     private $events;
 

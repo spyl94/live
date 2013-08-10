@@ -1,6 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
+{% block body %}
     <h1>Comment creation</h1>
 
     <form action="{{ path('admin_comment_create') }}" method="post" {{ form_enctype(form) }}>

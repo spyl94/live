@@ -5,6 +5,7 @@ namespace Live\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Live\UserBundle\Entity\User as User;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Post
@@ -35,7 +36,8 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -96,7 +98,7 @@ class Post
     private $commentsCount;
 
     /**
-     * @ORM\OneToOne(targetEntity="Live\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Live\UserBundle\Entity\User", cascade={"persist"})
      */
     private $author;
 
@@ -115,14 +117,40 @@ class Post
      */
     private $comments;
 
+    /* Used for Post create form only */
+    // TODO : implements better way (eg: using AJAX)
+
+    private $categoriesAdded;
+
+    public function setCategoriesAdded($categories)
+    {
+        foreach($categories as $cat) {
+
+            $this->categoriesAdded[] = $cat;
+            $this->categories[] = $cat;
+        }
+
+        return $this;
+    }
+
+    public function getCategoriesAdded()
+    {
+        return $this->categoriesAdded;
+    }
+
+    /* End */
+
 
     public function __construct()
     {
        $this->categories   = new \Doctrine\Common\Collections\ArrayCollection();
        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+       $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
 
        // Defaults
+       $this->setContentFormatter("tinymce");
        $this->setEnabled(true);
+       $this->setCommentsEnabled(true);
        $this->setPublicationDateStart(new \DateTime);
        $this->setCommentsCount(0);
     }
@@ -167,7 +195,6 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->setSlug($title);
 
         return $this;
     }
@@ -190,7 +217,7 @@ class Post
      */
     public function setSlug($slug)
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = $slug;
 
         return $this;
     }
@@ -395,7 +422,7 @@ class Post
      * @param \Live\UserBundle\Entity\User $author
      * @return Post
      */
-    public function setAuthor(\Live\UserBundle\Entity\User $author = null)
+    public function setAuthor(\Live\UserBundle\Entity\User $author)
     {
         $this->author = $author;
 
@@ -410,6 +437,19 @@ class Post
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $categories
+     * @return Post
+     */
+    public function setCategories(\Doctrine\Common\Collections\ArrayCollection $categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
     }
 
     /**
@@ -443,6 +483,19 @@ class Post
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param  \Live\BlogBundle\Entity\Tag $tags
+     * @return Post
+     */
+    public function setTags(\Live\BlogBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
     }
 
     /**

@@ -57,6 +57,11 @@ class Tag
      */
     private $updatedAt;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @ORM\prePersist
      */

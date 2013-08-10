@@ -6,18 +6,12 @@
     <div class="span8">
       <h2 class="section-title">Articles Récents</h2>
 
-      {% for post in posts %}
-        {{ post.content }}
-      {% endfor %}
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, deserunt, asperiores, dignissimos unde soluta delectus ut corrupti nobis eos iste cupiditate perspiciatis ullam facilis voluptate repudiandae necessitatibus repellat at magnam.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, ullam, repellendus dolore tempore magnam cum architecto minima dolor enim facilis ad distinctio repudiandae aliquid odit nisi deleniti cupiditate id perferendis.
+      <div class="posts-container">
+       {{ include('LiveBlogBundle:Post:list.html.twig', { 'posts': posts }) }}
+      </div>
 
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, deserunt, asperiores, dignissimos unde soluta delectus ut corrupti nobis eos iste cupiditate perspiciatis ullam facilis voluptate repudiandae necessitatibus repellat at magnam.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, ullam, repellendus dolore tempore magnam cum architecto minima dolor enim facilis ad distinctio repudiandae aliquid odit nisi deleniti cupiditate id perferendis.
-</p>
+      {{ include('LiveBlogBundle::pagination.html.twig', { 'page' : page, 'nombrePage' : nombrePage }) }}
+
     </div>
 
     <div class="span4">
@@ -36,7 +30,12 @@
       </p>
 
       <p>Alors qu'est ce tu attends ? :-)</p>
-        <a href="{{ path('calendar') }}" class="btn-action btn-big">Je veux m'inscrire !</a>
+        <a href="{{ path('fos_user_registration_register') }}" class="btn-action btn-big">Je veux m'inscrire !</a>
+
+      <br>
+      <h2 class="section-title">Mots clés</h2>
+      {{ include('LiveBlogBundle:Tag:list.html.twig', { 'tags': tags }) }}
+
     </div>
   </div>
 

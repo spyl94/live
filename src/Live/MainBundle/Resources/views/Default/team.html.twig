@@ -2,19 +2,14 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="text/javascript" src="{{ asset('bundles/livemain/js/jquery.jOrgChart.js') }}"></script>
-  <script>
-        $("#org").jOrgChart({
-            chartElement : '#chart'
-        });
-  </script>
+  <script type="text/javascript" src="{{ asset('bundles/livemain/js/custom.jquery.jOrgChart.js') }}"></script>
+  <script>$("#org").jOrgChart({chartElement : '#chart'});</script>
 {% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset('bundles/livemain/css/jquery.jOrgChart.css') }}"/>
 {% endblock %}
-
 
 {% block body %}
 <div class="container">
@@ -32,13 +27,13 @@
         </li>
         <li><strong>Aurélien David</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Président
           <ul>
-            <li><strong>Adrien Ramos</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> local / matériel</li>
-            <li><strong>Victor</strong> <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> membres</li>
+            <li><strong>Adrien Ramos</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> local & matériel</li>
+            <li><strong>- </strong> <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> membres</li>
           </ul>
         </li>
         <li><strong>Anthony Manieca</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Secrétaire
             <ul>
-              <li>- <br><img src="{{ asset('img/noavatar.png') }}" alt=""><br>Responsable communication</li>
+              <li><strong>Victor Haffreingue</strong><br><img src="{{ asset('img/noavatar.png') }}" alt=""><br>Responsable communication</li>
               <li><strong>Rémi Jarasson</strong> <img src="{{ asset('img/noavatar.png') }}" alt=""><br> Responsable <br> interne</li>
           </ul>
         </li>

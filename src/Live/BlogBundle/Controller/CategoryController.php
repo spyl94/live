@@ -9,19 +9,45 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Live\BlogBundle\Entity\Category;
 use Live\BlogBundle\Form\CategoryType;
+use Live\BlogBundle\Form\CategoryEditType;
 
 /**
  * Category controller.
  *
- * @Route("/admin/category")
  */
 class CategoryController extends Controller
 {
+    /**
+     * Finds and displays Post entities according to the category.
+     *
+     * @Route("/categories/{slug}/{page}", requirements={"page" = "\d+"}, defaults={"page" = 1}, name="category_show")
+     * @Template()
+     */
+    public function viewAction($slug, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository('LiveBlogBundle:Category')->findOneBySlug($slug);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Unable to find Category entity.');
+        }
+
+        $posts = $em->getRepository('LiveBlogBundle:Post')->findByCategory($category, 3, $page);
+
+        return array(
+            'category'  => $category,
+            'posts' => $posts,
+            'page'  => $page,
+            'nombrePage' => ceil(count($posts)/3)
+        );
+
+    }
 
     /**
      * Lists all Category entities.
      *
-     * @Route("/", name="admin_category")
+     * @Route("/admin/category/", name="admin_category")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +64,7 @@ class CategoryController extends Controller
     /**
      * Creates a new Category entity.
      *
-     * @Route("/", name="admin_category_create")
+     * @Route("/admin/category/", name="admin_category_create")
      * @Method("POST")
      * @Template("LiveBlogBundle:Category:new.html.twig")
      */
@@ -65,7 +91,7 @@ class CategoryController extends Controller
     /**
      * Displays a form to create a new Category entity.
      *
-     * @Route("/new", name="admin_category_new")
+     * @Route("/admin/category/new", name="admin_category_new")
      * @Method("GET")
      * @Template()
      */
@@ -83,7 +109,7 @@ class CategoryController extends Controller
     /**
      * Finds and displays a Category entity.
      *
-     * @Route("/{id}", name="admin_category_show")
+     * @Route("/admin/category/{id}", name="admin_category_show")
      * @Method("GET")
      * @Template()
      */
@@ -108,7 +134,7 @@ class CategoryController extends Controller
     /**
      * Displays a form to edit an existing Category entity.
      *
-     * @Route("/{id}/edit", name="admin_category_edit")
+     * @Route("/admin/category/{id}/edit", name="admin_category_edit")
      * @Method("GET")
      * @Template()
      */
@@ -122,7 +148,7 @@ class CategoryController extends Controller
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        $editForm = $this->createForm(new CategoryType(), $entity);
+        $editForm = $this->createForm(new CategoryEditType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -135,7 +161,7 @@ class CategoryController extends Controller
     /**
      * Edits an existing Category entity.
      *
-     * @Route("/{id}", name="admin_category_update")
+     * @Route("/admin/category/{id}", name="admin_category_update")
      * @Method("PUT")
      * @Template("LiveBlogBundle:Category:edit.html.twig")
      */
@@ -150,7 +176,7 @@ class CategoryController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CategoryType(), $entity);
+        $editForm = $this->createForm(new CategoryEditType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -169,7 +195,7 @@ class CategoryController extends Controller
     /**
      * Deletes a Category entity.
      *
-     * @Route("/{id}", name="admin_category_delete")
+     * @Route("/admin/category/{id}", name="admin_category_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

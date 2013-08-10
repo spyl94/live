@@ -1,9 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
-    <h1>Category</h1>
+{% block body %}
+<div class="container">
+    <h1>Catégorie</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -20,10 +21,6 @@
             <tr>
                 <th>Description</th>
                 <td>{{ entity.description }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ entity.content }}</td>
             </tr>
             <tr>
                 <th>Enabled</th>
@@ -59,8 +56,9 @@
         <form action="{{ path('admin_category_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </li>
 </ul>
+</div>
 {% endblock %}

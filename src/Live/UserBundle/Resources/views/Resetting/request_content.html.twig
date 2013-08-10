@@ -1,12 +1,26 @@
+<div style="margin-top: 100px"></div>
+
+<div class="row">
+<div class="span4">
+        <div class="bulle">
+            <h2>Pas de panique ! Vous pouvez réinitialiser votre mot de passe ici.</h2>
+        </div>
+    </div>
+<div class="span4 content-form">
+
 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
     <div>
         {% if invalid_username is defined %}
             <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
         {% endif %}
-        <label for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
-        <input type="text" id="username" name="username" />
+        <label for="username"></label>
+        <input type="text" id="username" name="username" placeholder="Nom d'utilisateur ou adresse e-mail"/>
     </div>
     <div>
-        <input type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+        <input class="btn btn-submit" type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
     </div>
 </form>
+
+</div>
+<div class="span3"><img src="{{ asset('img/logo/live_efrei.logo.icon.png') }}" alt=""></div>
+</div>
