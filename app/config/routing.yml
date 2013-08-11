@@ -1,3 +1,8 @@
+live_notification:
+    resource: "@LiveNotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 live_blog:
     resource: "@LiveBlogBundle/Controller/"
     type:     annotation

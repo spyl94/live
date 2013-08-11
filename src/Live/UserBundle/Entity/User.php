@@ -55,10 +55,14 @@ class User extends BaseUser
     private $promo;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="Live\CalendarBundle\Entity\Event", mappedBy="creator")
      */
     private $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Live\NotificationBundle\Entity\Notification", mappedBy="receiver")
+     */
+    private $notifications;
 
     /**
      * @ORM\OneToMany(targetEntity="Live\UserBundle\Entity\Instrument", mappedBy="player")
@@ -187,6 +191,39 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \Live\NotificationBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(\Live\NotificationBundle\Entity\Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \Live\NotificationBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(\Live\NotificationBundle\Entity\Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 
     /**

@@ -1,0 +1,42 @@
+{% extends "LiveBlogBundle::admin.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h2>Bienvenue dans l'espace d'administration</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Administration</th>
+                <th>Nouveau</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="{{ path('admin_post') }}"><button class="btn btn-large" type="button">Administration des Articles</button></a></td>
+                <td><a href="{{ path('admin_post_new') }}"><button class="btn btn-large btn-primary" type="button">Ajouter un nouvel article</button></a></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('admin_post') }}"><button class="btn btn-large" type="button">Administration des Tags</button></a></td>
+                <td><a href="{{ path('admin_tag_new') }}"><button class="btn btn-large btn-primary" type="button">Ajouter un nouveau tag</button></a></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('admin_category') }}"><button class="btn btn-large" type="button">Administration des Catégories</button></a></td>
+                <td><a href="{{ path('admin_category_new') }}"><button class="btn btn-large btn-primary" type="button">Ajouter une nouvelle catégorie</button></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

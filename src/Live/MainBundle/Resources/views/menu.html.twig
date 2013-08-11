@@ -3,7 +3,7 @@
   <div id="menu-container" class="container">
     <ul class="main left">
       <li id="menu-logo">
-        <a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" style="vertical-align:middle;"></a>
+        <a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" style="vertical-align: middle;"></a>
       </li>
       <li>
         <a href="#">Catégories</a>
@@ -29,6 +29,9 @@
               <i class="icon-user" style="margin-top: 4px"></i> {{ app.user.username }}
           </a>
           <ul id="menu-user">
+                {% if is_granted("ROLE_TEAM") %}
+                  <li><a href="{{ path('admin') }}">Administration</a></li>
+                {% endif %}
                 <li><a href="{{ path('fos_user_profile_edit') }}">Profile</a></li>
                 <li><a href="{{ path('calendar') }}">Réserver le local</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>

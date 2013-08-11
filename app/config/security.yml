@@ -6,8 +6,9 @@ security:
             entity: { class: Live\UserBundle\Entity\User, property: username }
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_TEAM:        ROLE_USER
+        ROLE_ADMIN:       ROLE_TEAM
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_TEAM, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         chain_provider:
@@ -45,4 +46,5 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_TEAM }
+        - { path: ^/admin/users/, role: ROLE_ADMIN }
