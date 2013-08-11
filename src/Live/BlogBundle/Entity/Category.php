@@ -88,7 +88,7 @@ class Category
     }
 
     /**
-     * @ORM\prePersist
+     * @ORM\RrePersist
      */
     public function prePersist()
     {
@@ -97,7 +97,7 @@ class Category
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {

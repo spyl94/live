@@ -70,7 +70,7 @@ class Tag
     }
 
     /**
-     * @ORM\prePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
@@ -79,7 +79,7 @@ class Tag
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {

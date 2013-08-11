@@ -81,7 +81,7 @@ class Comment
     private $post;
 
     /**
-     * @ORM\prePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
@@ -90,7 +90,7 @@ class Comment
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {
@@ -278,14 +278,14 @@ class Comment
     public function setPost(\Live\BlogBundle\Entity\Post $post)
     {
         $this->post = $post;
-    
+
         return $this;
     }
 
     /**
      * Get post
      *
-     * @return \Live\BlogBundle\Entity\Post 
+     * @return \Live\BlogBundle\Entity\Post
      */
     public function getPost()
     {

@@ -156,7 +156,7 @@ class Post
     }
 
     /**
-     * @ORM\prePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
@@ -169,7 +169,7 @@ class Post
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {
