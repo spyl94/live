@@ -1,3 +1,33 @@
+button.ui-button {
+	height: 40px !important;
+}
+.wc-display.ui-buttonset {
+	display: none;
+}
+.wc-nav.ui-buttonset {
+	position: relative;
+	padding-bottom: 10px;
+}
+.ui-widget-header.wc-toolbar {
+	position: relative;
+	background: white;
+	border: none;
+	font-size: 16px !important;
+	text-align: center !important;
+}
+.wc-toolbar .wc-nav {
+	float: none;
+}
+.wc-toolbar .wc-title {
+  text-align: center !important;
+}
+
+#calendar .ui-widget-header.wc-toolbar {
+	width: auto;
+	margin-left: auto;
+  margin-right: auto;
+}
+
 table.wc-time-slots {
     cursor: pointer;
 }
@@ -70,16 +100,6 @@ p {
 .ui-dialog {
 	width: 330px !important;
 }
-#about_button_container {
-	position: absolute;
-	top: 0em;
-	right: 0em;
-	padding: 0.5em 2em;
-	background: #ddf;
-	border: 1px solid #bbd;
-	width: 25em;
-	text-align: center;
-}
 
 #event_edit_container label {
 	display: block;
@@ -118,17 +138,3 @@ ol.formatted li {
 	list-style-type: decimal;
 }
 #switcher{float:left;}
-
-#message-info {
-  z-index: 9999; position: fixed; text-align: center; margin-left: 25%; width: 50%; margin-top: 23px;
-  padding: 8px 35px 8px 14px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
-            color: #3a87ad;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}

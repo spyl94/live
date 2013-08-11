@@ -86,7 +86,7 @@ $(document).ready(function() {
 
          $dialogContent.dialog({
             modal: true,
-            title: "Ajouter un événement",
+            title: "Ajouter un Événement",
             close: function() {
                $dialogContent.dialog("destroy");
                $dialogContent.hide();
@@ -100,7 +100,15 @@ $(document).ready(function() {
                   calEvent.body = bodyField.val();
 
                    $.ajax({url: AJAX_URLS.addEvent, type: "post", data:{start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg) {
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                    }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
 
                   $calendar.weekCalendar("removeUnsavedEvents");
                   $calendar.weekCalendar("updateEvent", calEvent);
@@ -118,11 +126,27 @@ $(document).ready(function() {
       },
       eventDrop : function(calEvent, $event) {
           $.ajax({url: AJAX_URLS.editEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                    }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
       },
       eventResize : function(calEvent, $event) {
            $.ajax({url:AJAX_URLS.editEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                    }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
       },
       eventClick : function(calEvent, $event) {
 
@@ -149,15 +173,35 @@ $(document).ready(function() {
             buttons: {
                valider : function() {
                   $.ajax({url: AJAX_URLS.validateEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                    }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
+
                 $calendar.weekCalendar("updateEvent", calEvent);
                 $dialogContent.dialog("close");
+
                },
                refuser : function() {
                   $.ajax({url: AJAX_URLS.refusedEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                    }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
+
                 $calendar.weekCalendar("updateEvent", calEvent);
                 $dialogContent.dialog("close");
+
                },
                modifier : function() {
 
@@ -166,13 +210,29 @@ $(document).ready(function() {
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
                    $.ajax({url: AJAX_URLS.editEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                  }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
+
                   $calendar.weekCalendar("updateEvent", calEvent);
                   $dialogContent.dialog("close");
                },
                "supprimer" : function(msg) {
                    $.ajax({url: AJAX_URLS.removeEvent, type: "post", data:{eventID: calEvent.id, start: calEvent.start.toJSON(), end:calEvent.end.toJSON(), title:calEvent.title},
-                    success: function(msg){$("#message-info").empty().html(msg).show().delay(2000).fadeOut();$calendar.weekCalendar("refresh");}, error: function(){$calendar.weekCalendar("refresh");}});
+                    success: function(msg){
+                      toastr.success(msg);
+                      $calendar.weekCalendar("refresh");
+                   }, error: function(xhr) {
+                      var err = eval("(" + xhr.responseText + ")");
+                      toastr.error(err.msg);
+                      $calendar.weekCalendar("refresh");
+                    }
+                  });
 
                   $calendar.weekCalendar("removeEvent", calEvent.id);
                   $dialogContent.dialog("close");
@@ -269,25 +329,5 @@ $(document).ready(function() {
       }
 
    });
-
-
-   var $about = $("#about");
-
-   $("#about_button").click(function() {
-      $about.dialog({
-         title: "About this calendar demo",
-         width: 600,
-         close: function() {
-            $about.dialog("destroy");
-            $about.hide();
-         },
-         buttons: {
-            close : function() {
-               $about.dialog("close");
-            }
-         }
-      }).show();
-   });
-
 
 });

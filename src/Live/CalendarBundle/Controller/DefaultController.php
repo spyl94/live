@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Live\CalendarBundle\Entity\Event;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/calendar", name="calendar")
-     * @Template()
      */
     public function indexAction()
     {
@@ -21,7 +22,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/calendar/getEventData", name="getEventData")
-     * @Template()
      */
     public function getEventDataAction()
     {
@@ -37,7 +37,7 @@ class DefaultController extends Controller
                 "title" => $value->getTitle(),
                 "validate" => $value->getValidate(),
                 "readOnly" => $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY') && ($value->getCreator() == $this->getUser() ||
-                 $this->get('security.context')->isGranted('ROLE_ADMIN')) ? false : true,
+                 $this->get('security.context')->isGranted('ROLE_TEAM')) ? false : true,
                 "refused" => $value->getRefused(),
                 "creator" => $value->getCreator()->getUsername()
             );
@@ -47,7 +47,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/calendar/addEvent", name="addEvent")
-     * @Template()
      */
     public function addEventAction()
     {
@@ -76,17 +75,15 @@ class DefaultController extends Controller
                     $em->flush();
                     return new Response("La réservation a été ajoutée avec succès !");
                 }
-                return new Response("Impossible d'effectuer une réservation dans le passé !");
-
+                return new JsonResponse(array('msg' => 'Impossible d\'effectuer une réservation dans le passé !'), 419);
             }
-            return new Response("Pour effectuer une réservation, vous devez vous connecter !");
+            return new JsonResponse(array('msg' => 'Pour effectuer une réservation, vous devez vous connecter !'), 419);
         }
         return new Response();
     }
 
     /**
      * @Route("/calendar/editEvent", name="editEvent")
-     * @Template()
      */
     public function editEventAction()
     {
@@ -95,7 +92,7 @@ class DefaultController extends Controller
 
             $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
             $event = $repository->findOneById($request->request->get('eventID'));
-            if ($event && ($this->get('security.context')->isGranted('ROLE_ADMIN')
+            if ($event && ($this->get('security.context')->isGranted('ROLE_TEAM')
                 || ($event->getCreator() == $this->getUser()
                     && new \DateTime() < new \DateTime($request->request->get('start'))
                 ))) {
@@ -110,7 +107,7 @@ class DefaultController extends Controller
                 $em->flush();
                 return new Response("Modification effectuée avec succès !");
             }
-            return new Response("Vous ne pouvez pas modifier cet évent !");
+            return new JsonResponse(array('msg' => "Vous ne pouvez pas modifier cet évent !"), 419);
         }
         return new Response("");
     }
@@ -118,7 +115,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/calendar/removeEvent", name="removeEvent")
-     * @Template()
      */
     public function removeEventAction()
     {
@@ -128,7 +124,7 @@ class DefaultController extends Controller
 
             $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
             $event = $repository->findOneById($request->request->get('eventID'));
-            if($event && ($this->get('security.context')->isGranted('ROLE_ADMIN')
+            if($event && ($this->get('security.context')->isGranted('ROLE_TEAM')
                 || $event->getCreator() == $this->getUser())) {
 
                 $em = $this->getDoctrine()->getManager();
@@ -136,7 +132,7 @@ class DefaultController extends Controller
                 $em->flush();
                 return new Response("La réservation a été supprimée avec succès !");
             }
-            return new Response("Vous ne pouvez pas supprimer cet évenement !");
+            return new JsonResponse(array('msg' => "Vous ne pouvez pas supprimer cet évenement !"), 419);
         }
         return new Response();
     }
@@ -144,7 +140,6 @@ class DefaultController extends Controller
 
     /**
      * @Route("/calendar/validateEvent", name="validateEvent")
-     * @Template()
     */
     public function validateEventAction()
     {
@@ -153,7 +148,7 @@ class DefaultController extends Controller
 
             $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
             $event = $repository->findOneById($request->request->get('eventID'));
-            if($event) {
+            if($event && $this->get('security.context')->isGranted('ROLE_TEAM')) {
                 $event->setValidate(true);
                 $event->setRefused(false);
                 $em = $this->getDoctrine()->getManager();
@@ -161,13 +156,13 @@ class DefaultController extends Controller
                 $em->flush();
                 return new Response("La réservation a été validée avec succès !");
             }
+            return new JsonResponse(array('msg' => "Vous ne pouvez pas valider cet évenement !"), 419);
         }
         return new Response();
     }
 
     /**
      * @Route("/calendar/refusedEvent", name="refusedEvent")
-     * @Template()
     */
     public function refusedEventAction()
     {
@@ -176,7 +171,7 @@ class DefaultController extends Controller
 
             $repository = $this->getDoctrine()->getRepository('LiveCalendarBundle:Event');
             $event = $repository->findOneById($request->request->get('eventID'));
-            if($event) {
+            if($event && $this->get('security.context')->isGranted('ROLE_TEAM')) {
                 $event->setValidate(false);
                 $event->setRefused(true);
                 $em = $this->getDoctrine()->getManager();
@@ -184,6 +179,7 @@ class DefaultController extends Controller
                 $em->flush();
                 return new Response("La réservation a été refusée avec succès !");
             }
+            return new JsonResponse(array('msg' => "Vous ne pouvez pas refuser cet évenement !"), 419);
         }
         return new Response();
     }

@@ -29,20 +29,22 @@
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/date.js') }}'></script>
     <script type='text/javascript' src='{{ asset('js/jwerty.js') }}'></script>
     <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/jquery.weekcalendar.js') }}'></script>
-    {% if is_granted('ROLE_ADMIN') %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script>
-    {% else %} <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
+    {% if is_granted('ROLE_ADMIN') %}
+        <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live-admin.js') }}'></script>
+    {% else %}
+        <script type='text/javascript' src='{{ asset('bundles/livecalendar/js/live.js') }}'></script>
     {% endif %}
 
     <script type="text/javascript">
     $(document).ready(function() {
         var $calendar = $('#calendar');
-        jwerty.key('q/←', function () {
+        jwerty.key('←', function () {
             $calendar.weekCalendar("prevWeek");
         });
-        jwerty.key('d/→', function () {
+        jwerty.key('→', function () {
             $calendar.weekCalendar("nextWeek");
         });
-        jwerty.key('z/↑', function () {
+        jwerty.key('↑', function () {
             $calendar.weekCalendar("today");
         });
     });
