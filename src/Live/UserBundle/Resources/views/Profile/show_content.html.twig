@@ -1,4 +1,4 @@
-<div class="span7 well">
+<div class="span5 well">
     <div class="row">
         <div class="span1">
             <a href="#" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="">
@@ -16,4 +16,10 @@
             Synthé: <div class="star" data-score="1"></div>
         </div>
     </div>
+</div>
+<div class="span6">
+    <h3>Vous proposez les cours suivants:</h3>
+            {% render(controller("LiveLessonBundle:Lesson:list", { 'user': app.user })) %}
+    <h3>Vous cherchez des cours de:</h3>
+    {% render(controller("LiveLessonBundle:LessonAsk:list", { 'user': app.user })) %}
 </div>

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Live\CalendarBundle\LiveCalendarBundle(),
             new Live\BlogBundle\LiveBlogBundle(),
             new Live\NotificationBundle\LiveNotificationBundle(),
+            new Live\LessonBundle\LiveLessonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

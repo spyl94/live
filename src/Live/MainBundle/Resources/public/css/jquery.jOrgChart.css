@@ -38,7 +38,7 @@
   color: #F38630;
   -moz-border-radius: 8px;
   width: 160px;
-  height: 160px;
+  height: auto;
   z-index: 10;
   margin: 0 2px;
   display: inline-block;

@@ -588,3 +588,22 @@ h2.post-title:hover {
     width: 300px;
   }
 }
+
+/**
+ * Divers
+ */
+.img-team {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+ul.ul-live {
+  list-style-image: url('../img/logo/live_efrei.logo.icon.min.png');
+  list-style-position:inside;
+  padding: 0 0 0 0;
+}
+
+ul.ul-live li
+{
+  padding-bottom: 5px;
+}

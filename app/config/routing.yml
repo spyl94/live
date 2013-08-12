@@ -1,3 +1,8 @@
+live_lesson:
+    resource: "@LiveLessonBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 live_notification:
     resource: "@LiveNotificationBundle/Controller/"
     type:     annotation

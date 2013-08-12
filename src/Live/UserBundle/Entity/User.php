@@ -65,7 +65,7 @@ class User extends BaseUser
     private $notifications;
 
     /**
-     * @ORM\OneToMany(targetEntity="Live\UserBundle\Entity\Instrument", mappedBy="player")
+     * @ORM\ManyToMany(targetEntity="Live\LessonBundle\Entity\Instrument", mappedBy="player")
      */
     private $instruments;
 
@@ -229,10 +229,10 @@ class User extends BaseUser
     /**
      * Add instruments
      *
-     * @param \Live\UserBundle\Entity\Instrument $instruments
+     * @param \Live\LessonBundle\Entity\Instrument $instruments
      * @return User
      */
-    public function addInstrument(\Live\UserBundle\Entity\Instrument $instruments)
+    public function addInstrument(\Live\LessonBundle\Entity\Instrument $instruments)
     {
         $this->instruments[] = $instruments;
 
@@ -242,9 +242,9 @@ class User extends BaseUser
     /**
      * Remove instruments
      *
-     * @param \Live\UserBundle\Entity\Instrument $instruments
+     * @param \Live\LessonBundle\Entity\Instrument $instruments
      */
-    public function removeInstrument(\Live\UserBundle\Entity\Instrument $instruments)
+    public function removeInstrument(\Live\LessonBundle\Entity\Instrument $instruments)
     {
         $this->instruments->removeElement($instruments);
     }

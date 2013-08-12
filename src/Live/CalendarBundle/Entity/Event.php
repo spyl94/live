@@ -59,6 +59,7 @@ class Event
     /**
      *
      * @ORM\ManyToOne(targetEntity="Live\UserBundle\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $creator;
 

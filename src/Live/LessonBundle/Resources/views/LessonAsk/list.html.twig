@@ -1,0 +1,16 @@
+<table class="table">
+    <tbody>
+        {% for entity in entities %}
+        <tr class="success">
+            <td>{{ entity.instrument }}</td>
+            <td><form action="{{ path('lessonask_delete', { 'id': entity.id }) }}" method="post"><input type="hidden" name="_method" value="DELETE" />{{ form_widget(deleteForms[loop.index0]) }}<button class="btn" type="submit">Supprimer</button></form>
+            </td>
+        </tr>
+        {% else %}
+            Vous ne proposez pas encore de cours :-(
+        {% endfor %}
+    </tbody>
+</table>
+<form id="lesson-create" class="form-inline" action="{{ path('lessonask_create') }}" method="post" {{ form_enctype(form) }}>
+        Ajouter un cours : {{ form_widget(form.instrument) }} {{ form_rest(form) }}<button class="btn" type="submit">Valider</button>
+</form>
