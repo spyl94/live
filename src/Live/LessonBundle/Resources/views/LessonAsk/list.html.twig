@@ -1,13 +1,13 @@
 <table class="table">
     <tbody>
         {% for entity in entities %}
-        <tr class="success">
+        <tr class="info">
             <td>{{ entity.instrument }}</td>
             <td><form action="{{ path('lessonask_delete', { 'id': entity.id }) }}" method="post"><input type="hidden" name="_method" value="DELETE" />{{ form_widget(deleteForms[loop.index0]) }}<button class="btn" type="submit">Supprimer</button></form>
             </td>
         </tr>
         {% else %}
-            Vous ne proposez pas encore de cours :-(
+            Vous ne cherchez aucun cours ! Vous devez être doué ;-)
         {% endfor %}
     </tbody>
 </table>

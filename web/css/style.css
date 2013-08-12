@@ -607,3 +607,7 @@ ul.ul-live li
 {
   padding-bottom: 5px;
 }
+
+.table form {
+  margin: 0 0 0;
+}
