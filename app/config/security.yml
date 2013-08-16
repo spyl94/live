@@ -25,8 +25,6 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-                always_use_default_target_path: true
-                default_target_path: /calendar
             fos_facebook:
                 app_url: "http://apps.facebook.com/liveefrei/"
                 server_url: "http://localhost/live/web/app_dev.php/"

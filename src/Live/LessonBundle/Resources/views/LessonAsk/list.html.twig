@@ -3,7 +3,7 @@
         {% for entity in entities %}
         <tr class="info">
             <td>{{ entity.instrument }}</td>
-            <td><form action="{{ path('lessonask_delete', { 'id': entity.id }) }}" method="post"><input type="hidden" name="_method" value="DELETE" />{{ form_widget(deleteForms[loop.index0]) }}<button class="btn" type="submit">Supprimer</button></form>
+            <td><form action="{{ path('lessonask_delete', { 'id': entity.id }) }}" method="post"><input type="hidden" name="_method" value="DELETE" />{{ form_widget(deleteForms[loop.index0]) }}<button class="close" type="submit">&times;</button></form>
             </td>
         </tr>
         {% else %}

@@ -11,7 +11,7 @@ class SecurityController extends BaseController
     {
         $template = sprintf('FOSUserBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
 
-        $data['registration'] = $this->container->get('fos_user.registration.form')->createView();
+        $data['registration'] = $this->container->get('fos_user.registration.form.factory')->createForm()->createView();
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }

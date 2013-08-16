@@ -17,9 +17,6 @@
         {% if error %}
             <div class="control-group error"><span class="help-inline">{{ error|trans({}, 'FOSUserBundle') }} !</span></div>
         {% endif %}
-        {#<div style="margin-left: -65px" class="fb-login-button" data-show-faces="false" data-size="xlarge"
-            data-scope="email,user_birthday,user_location" data-autologoutlink="" data-width="" data-max-rows="1"  data-onlogin="">
-        Connexion avec Facebook</div>#}
                 <a href="#" id="facebook-login" ><img style="width: 296px" src="{{ asset('img/login/facebook.png') }}" alt="" /></a>
                 <h3 style="font-size: 20px"> Ou </h3>
         <form class="form-vertical" action="{{ path("fos_user_security_check") }}" method="post">

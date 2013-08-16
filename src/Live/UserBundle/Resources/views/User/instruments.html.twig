@@ -1,0 +1,3 @@
+{% for entity in instruments | slice(start, length) %}
+  {{ entity.name }} <div class="star" data-score="{{ entity.level }}"></div>
+{% endfor %}

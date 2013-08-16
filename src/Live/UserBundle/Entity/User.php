@@ -2,8 +2,8 @@
 
 namespace Live\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
-//use FOS\UserBundle\Model\User as BaseUser;
+//use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -65,7 +65,7 @@ class User extends BaseUser
     private $notifications;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Live\LessonBundle\Entity\Instrument", mappedBy="player")
+     * @ORM\ManyToMany(targetEntity="Live\LessonBundle\Entity\Instrument")
      */
     private $instruments;
 
@@ -73,6 +73,9 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->notifications = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->instruments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function serialize()
@@ -224,6 +227,21 @@ class User extends BaseUser
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * Set instruments
+     *
+     * @param array
+     * @return User
+     */
+    public function setInstruments($instruments)
+    {
+        foreach ($instruments as $instrument) {
+            $this->addInstrument($instrument);
+        }
+
+        return $this;
     }
 
     /**

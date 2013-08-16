@@ -1,0 +1,63 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+<div class="span5 well">
+    <div class="row">
+        <div class="span1">
+            <a href="#" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="">
+            </a>
+        </div>
+        <div class="span3">
+            <p>{{ user.username }}</p>
+            <p><strong>{{ user.firstname }} {{ user.lastname }}</strong></p>
+            <p>{{ user.promo }}</p>
+            <span class=" badge badge-warning">{{ user.email }}</span> <span class=" badge badge-info">15 followers</span>
+        </div>
+        <div class="span3">
+            Guitare: <div class="star" data-score="1"></div>
+            Basse: <div class="star" data-score="1"></div>
+            Batterie: <div class="star" data-score="1"></div>
+            Synthé: <div class="star" data-score="1"></div>
+        </div>
+    </div>
+</div>
+<div class="span5 well">
+  {% if lessons is empty and asks is empty %}
+    <p>{{ user }} ne cherche ni de demande aucun cours de musique pour le moment !</p>
+  {% else %}
+    {% if lessons is not empty %}
+        <p>{{ user }} est professeur de :</p>
+        <table class="table">
+            <tbody>
+              {% for lesson in lessons %}
+                <tr class="success">
+                    <td>{{ lesson.instrument }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ user }} ne propose actuellement aucun cours de musique.</p>
+    {% endif %}
+
+    {% if asks is not empty %}
+        <p>{{ user }} cherche les cours suivants :</p>
+        <table class="table">
+            <tbody>
+              {% for lesson in asks %}
+                <tr class="info">
+                    <td>{{ lesson.instrument }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{{ user }} ne cherche actuellement aucun cours de musique.</p>
+    {% endif %}
+  {% endif %}
+
+</div>
+
+{% endblock fos_user_content %}
+

@@ -12,6 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class InstrumentRepository extends EntityRepository
 {
+    public function getInstrumentsLowLevel()
+    {
+      $qb = $this->createQueryBuilder('i');
+      $qb->where($qb->expr()->eq('i.level', 0))
+         ->orderBy('i.name', 'ASC');
+
+      return $qb->getQuery()->getResult();
+    }
 
     public function getInstrumentsNotPlayedBy($id)
     {

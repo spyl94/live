@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             //new Knp\Bundle\MenuBundle\KnpMenuBundle(),

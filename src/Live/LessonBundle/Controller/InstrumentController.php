@@ -17,7 +17,6 @@ use Live\LessonBundle\Form\InstrumentType;
  */
 class InstrumentController extends Controller
 {
-
     /**
      * Lists all Instrument entities.
      *

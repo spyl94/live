@@ -28,23 +28,6 @@ class Instrument
      */
     private $level;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Live\UserBundle\Entity\User", inversedBy="instruments")
-     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
-     */
-    private $players;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->player = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Constructor
-     */
     public function __toString()
     {
         switch ($this->level) {
@@ -124,36 +107,4 @@ class Instrument
         return $this->level;
     }
 
-    /**
-     * Add player
-     *
-     * @param \Live\UserBundle\Entity\User $player
-     * @return Instrument
-     */
-    public function addPlayer(\Live\UserBundle\Entity\User $player)
-    {
-        $this->player[] = $player;
-
-        return $this;
-    }
-
-    /**
-     * Remove player
-     *
-     * @param \Live\UserBundle\Entity\User $player
-     */
-    public function removePlayer(\Live\UserBundle\Entity\User $player)
-    {
-        $this->player->removeElement($player);
-    }
-
-    /**
-     * Get players
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPlayers()
-    {
-        return $this->players;
-    }
 }

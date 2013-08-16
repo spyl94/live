@@ -129,6 +129,12 @@ services:
             facebook: "@fos_facebook.api"
             userManager: "@fos_user.user_manager"
             validator: "@validator"
+    live_user.registration:
+        class: Live\UserBundle\EventListener\RegistrationListener
+        arguments:
+            [ @doctrine.orm.entity_manager, @router]
+        tags:
+            - { name: kernel.event_subscriber }
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:
@@ -166,6 +172,12 @@ stof_doctrine_extensions:
 genemu_form:
     select2: ~
     date: ~
+
+ornicar_gravatar:
+    rating: g
+    size: 80
+    default: mm
+
 
 stfalcon_tinymce:
         include_jquery: false
