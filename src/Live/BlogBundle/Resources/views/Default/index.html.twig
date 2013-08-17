@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="span8">
-      <h2 class="section-title">Articles Récents</h2>
+      <h2 class="section-title">{% if page == 1 %}Articles Récents{% else %} Articles - Page {{ page }}{% endif %}</h2>
 
       <div class="posts-container">
        {{ include('LiveBlogBundle:Post:list.html.twig', { 'posts': posts }) }}

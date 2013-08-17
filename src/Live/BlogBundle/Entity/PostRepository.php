@@ -31,7 +31,7 @@ class PostRepository extends EntityRepository
 	                  ->leftJoin('a.categories', 'cat')
 	                    ->addSelect('cat')
                     ->where('a.enabled = 1')
-	                  ->orderBy('a.createdAt', 'ASC')
+	                  ->orderBy('a.publicationDateStart', 'DESC')
 	                  ->getQuery();
 
 	    $query->setFirstResult(($page-1) * $nombreParPage)
