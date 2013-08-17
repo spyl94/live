@@ -16,7 +16,7 @@
                 click: function(score) {
                     console.log('cc');
                     $.ajax({
-                        url: {{ path('instrument_update') }},
+                        url: '{{ path('instrument_update') }}',
                         type: "post",
                         data:{
                             id: $(this).data('id'),
