@@ -14,12 +14,11 @@
                   return $(this).attr('data-score');
                 },
                 click: function(score) {
-                    console.log('cc');
                     $.ajax({
                         url: '{{ path('instrument_update') }}',
                         type: "post",
-                        data:{
-                            id: $(this).data('id'),
+                        data: {
+                            id: $(this).data('name'),
                             level: score
                         }
                   });

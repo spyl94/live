@@ -21,16 +21,10 @@ class DefaultController extends Controller
     public function updateInstrumentAjaxAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $id = $request->request->get('id');
+            $name = $request->request->get('name');
             $level = $request->request->get('level');
 
             $em = $this->getDoctrine()->getManager();
-
-            $entity = $em->getRepository('LiveLessonBundle:Instrument')->find($id);
-
-            if (!$entity) {
-                return new JsonResponse(array('msg' => "Instrument introuvable !"), 419);
-            }
 
             $instrument = $em->getRepository('LiveLessonBundle:Instrument')->findOneBy(array('name' => $entity->getName(), 'level' => $level));
 
@@ -39,7 +33,12 @@ class DefaultController extends Controller
             }
 
             $user = $this->getUser();
-            $user->removeInstrument($entity);
+            $instruments = $user->getInstruments();
+
+            foreach ($instruments as $i) {
+               if ($i->getName() == $name) $user->removeInstrument($i);
+            }
+
             $user->addInstrument($instrument);
             $em->flush();
             return new Response("OK");
