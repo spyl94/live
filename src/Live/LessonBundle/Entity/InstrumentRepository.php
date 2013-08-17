@@ -34,7 +34,7 @@ class InstrumentRepository extends EntityRepository
       }
       $qb = $this->createQueryBuilder('i')->where('i.level != 0');
 
-      return empty($fix) ? $qb->orderBy('i.name', 'ASC'); : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
+      return empty($fix) ? $qb->orderBy('i.name', 'ASC') : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
     }
 
     public function getInstrumentsNotAskedBy($id)
@@ -49,6 +49,6 @@ class InstrumentRepository extends EntityRepository
       }
       $qb = $this->createQueryBuilder('i')->where('i.level != 0');
 
-      return empty($fix) ? $qb->orderBy('i.name', 'ASC'); : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
+      return empty($fix) ? $qb->orderBy('i.name', 'ASC') : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
     }
 }
