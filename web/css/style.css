@@ -121,7 +121,7 @@ body {
 
 #menu-container .left ul a {
   padding: 10px;
-  width: 222px;
+  width: 230px;
   line-height: 1;
   display: block;
   white-space: nowrap;
@@ -140,7 +140,10 @@ body {
 }
 
 #menu-container #menu-user {
-  margin-left: -135px;
+  margin-left: -130px;
+}
+#menu-container #menu-follow {
+
 }
 
 #menu-container .main ul a:hover {
@@ -328,6 +331,11 @@ h2.post-title:hover {
     color: grey;
     font-size: 14px;
     line-height: 14px;
+    margin-top: -9px;
+}
+
+#dev-list {
+   height: 32px;
 }
 
 #dev-list li a {

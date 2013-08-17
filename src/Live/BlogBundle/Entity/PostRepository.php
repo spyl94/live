@@ -30,7 +30,8 @@ class PostRepository extends EntityRepository
 	    $query = $this->createQueryBuilder('a')
 	                  ->leftJoin('a.categories', 'cat')
 	                    ->addSelect('cat')
-	                  ->orderBy('a.createdAt', 'DESC')
+                    ->where('a.enabled = 1')
+	                  ->orderBy('a.createdAt', 'ASC')
 	                  ->getQuery();
 
 	    $query->setFirstResult(($page-1) * $nombreParPage)
