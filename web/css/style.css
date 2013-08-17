@@ -601,6 +601,10 @@ h2.post-title:hover {
 /**
  * Divers
  */
+ul li {
+  line-height: 32px;
+}
+
 .img-team {
   max-width: 100px;
   max-height: 100px;
