@@ -6,6 +6,28 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $.each($('.star'), function( key, value ) {
+              $(value).raty({
+                score: function() {
+                  return $(this).attr('data-score');
+                },
+                click: function(score) {
+                    console.log('cc');
+                    $.ajax({
+                        url: {{ path('instrument_update') }},
+                        type: "post",
+                        data:{
+                            id: $(this).data('id'),
+                            level: score
+                        }
+                  });
+                }
+              });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block navbar %}

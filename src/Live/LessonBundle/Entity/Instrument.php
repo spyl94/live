@@ -31,16 +31,16 @@ class Instrument
     public function __toString()
     {
         switch ($this->level) {
-            case 0:
+            case 1:
                 return $this->name . ' débutant';
                 break;
-            case 1:
+            case 2:
                 return $this->name . ' intermédiaire';
                 break;
-            case 2:
+            case 3:
                 return $this->name . ' confirmé';
                 break;
-            case 3:
+            case 4:
                 return $this->name . ' expert';
                 break;
             default:

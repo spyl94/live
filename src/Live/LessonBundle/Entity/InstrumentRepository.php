@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class InstrumentRepository extends EntityRepository
 {
+
     public function getInstrumentsLowLevel()
     {
       $qb = $this->createQueryBuilder('i');
@@ -31,9 +32,9 @@ class InstrumentRepository extends EntityRepository
       foreach ($nots as $n) {
           $fix[] = $n[1];
       }
-      $qb = $this->createQueryBuilder('i');
+      $qb = $this->createQueryBuilder('i')->where('i.level != 0');
 
-      return empty($fix) ? $qb : $qb->where($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
+      return empty($fix) ? $qb : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
     }
 
     public function getInstrumentsNotAskedBy($id)
@@ -46,8 +47,8 @@ class InstrumentRepository extends EntityRepository
       foreach ($nots as $n) {
           $fix[] = $n[1];
       }
-      $qb = $this->createQueryBuilder('i');
+      $qb = $this->createQueryBuilder('i')->where('i.level != 0');
 
-      return empty($fix) ? $qb : $qb->where($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
+      return empty($fix) ? $qb : $qb->andWhere($qb->expr()->notIn('i.id', $fix))->orderBy('i.name', 'ASC');
     }
 }

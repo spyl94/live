@@ -17,6 +17,7 @@ use Live\LessonBundle\Form\InstrumentType;
  */
 class InstrumentController extends Controller
 {
+
     /**
      * Lists all Instrument entities.
      *
@@ -165,6 +166,7 @@ class InstrumentController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Instrument entity.
      *
