@@ -43,11 +43,11 @@ class PostType extends AbstractType
                     'allow_delete' => true,
                     'by_reference' => false,
                     'required' => false,
-                    'label' => '',
+                    'label' => false,
                     'options'  => array(
                         'required'  => true,
                         'attr'      => array('class' => 'cat-add')
-                    ),
+                                ),
                 ))
             ->add('categories', 'entity', array(
                     'class' => 'Live\BlogBundle\Entity\Category',

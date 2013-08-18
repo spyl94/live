@@ -1,6 +1,6 @@
 {% extends "LiveBlogBundle::admin.html.twig" %}
 
-{% block body -%}
+{% block body %}
 <div class="container">
     <h1>Edition d'un article</h1>
 
@@ -32,4 +32,24 @@
                 <button type="submit" class="btn btn-danger">Supprimer (définitivement)</button>
     </form>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+    <script>
+      jQuery(document).ready(function() {
+
+        // Select2
+        $('#live_blogbundle_postedittype_categories').select2({
+                placeholder: "Choisissez une ou plusieurs catégorie(s)",
+                allowClear: true
+            });
+        $('#live_blogbundle_postedittype_tags').select2({
+                placeholder: "Choisissez un ou plusieurs tag(s)",
+                allowClear: true
+            });
+
+      });
+    </script>
+
 {% endblock %}

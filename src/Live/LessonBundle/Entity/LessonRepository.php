@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class LessonRepository extends EntityRepository
 {
+  public function findByCreatorOrderedByNameAndLevel($user)
+  {
+
+      $qb = $this->createQueryBuilder('l');
+      $query = $qb->leftJoin('l.instrument', 'i')
+                    ->addSelect('i')
+                  ->where($qb->expr()->eq('l.creator', $user->getId()))
+                  ->addOrderBy('i.name', 'ASC')
+                  ->addOrderBy('i.level', 'ASC')
+                  ->getQuery();
+
+      return $query->getResult();
+  }
 }
