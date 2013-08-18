@@ -41,12 +41,12 @@
     <div class="slider-wrapper container theme-default">
         <div id="slider" class="nivoSlider">
             <img src="{{ asset('bundles/liveblog/images/slider/live_assos.jpg') }}" alt="" title="#live-assos-prez" />
-            <a href="{{ path('about') }}"><img src="{{ asset('bundles/liveblog/images/slider/jam_sess.jpg') }}" alt="" title="#htmlcaption" /></a>
+            <a href="#"><img src="{{ asset('bundles/liveblog/images/slider/jam_sess.jpg') }}" alt="" title="#htmlcaption" /></a>
             <img src="{{ asset('bundles/liveblog/images/slider/batterie.jpg') }}" alt="" />
             <img src="{{ asset('bundles/liveblog/images/slider/jam_sess_2.jpg') }}" alt="" />
         </div>
     </div>
     <div id="live-assos-prez" class="nivo-html-caption">
-        Live Efrei est l'association musicale de L'efrei. <a href="#">En savoir plus !</a>
+        Live Efrei est l'association musicale de L'efrei. <a href="{{ path('about') }}">En savoir plus !</a>
     </div>
 {% endblock %}
