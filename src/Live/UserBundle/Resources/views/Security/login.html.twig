@@ -6,10 +6,10 @@
 
 <div class="row">
     <div class="span4">
-        <div class="bulle">
+        <div class="bulle hidden-phone">
             <h2>Utilisez directement votre compte Facebook pour naviguer sur le site.</h2>
         </div>
-        <div class="bulle">
+        <div class="bulle hidden-phone">
             <h2>Vous avez déjà un compte ? Parfait ! Connectez vous ici.</h2>
         </div>
     </div>
@@ -28,7 +28,7 @@
         </form>
         <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a>
     </div>
-    <div class="span3"><img src="{{ asset('img/logo/live_efrei.logo.icon.png') }}" alt=""></div>
+    <div class="span3 hidden-phone"><img src="{{ asset('img/logo/live_efrei.logo.icon.png') }}" alt=""></div>
 </div>
 
 <div style="padding-bottom: 100px"></div>
