@@ -40,7 +40,9 @@
               $(value).raty({
                 score: function() {
                   return $(this).attr('data-score');
-                }
+                },
+                readOnly: true,
+                hints: ['débutant', 'intermédiaire', 'confirmé', 'expert']
               });
             });
 

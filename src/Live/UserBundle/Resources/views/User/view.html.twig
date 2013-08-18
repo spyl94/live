@@ -3,24 +3,22 @@
 {% block fos_user_content %}
 
 <div class="span5 well">
-    <div class="row">
-        <div class="span1">
-            <a href="#" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt="">
-            </a>
-        </div>
-        <div class="span3">
-            <p>{{ user.username }}</p>
-            <p><strong>{{ user.firstname }} {{ user.lastname }}</strong></p>
-            <p>{{ user.promo }}</p>
-            <span class=" badge badge-warning">{{ user.email }}</span> <span class=" badge badge-info">15 followers</span>
-        </div>
-        <div class="span3">
-            Guitare: <div class="star" data-score="1"></div>
-            Basse: <div class="star" data-score="1"></div>
-            Batterie: <div class="star" data-score="1"></div>
-            Synthé: <div class="star" data-score="1"></div>
-        </div>
+  <div class="span1">
+    <a href="#" class="thumbnail"><img src="{{ gravatar(user.email) }}" alt=""></a>
+  </div>
+  <div class="span3">
+    <a href="{{ path('users_view', {'slug' : user.usernameCanonical }) }}">{{ user.username }}</a>
+    <p><strong>{{ user.firstname }} {{ user.lastname }}</strong></p>
+    <span class=" badge badge-warning">{{ user.email }}</span> <span class=" badge badge-info">{{ user.promo }}</span>
+  </div>
+  <div class="span5 row">
+    <div class="span2">
+      {% render(controller("LiveUserBundle:User:instruments", { 'user' : app.user, 'limit' : 2, offset : 0 })) %}
     </div>
+    <div class="span2">
+      {% render(controller("LiveUserBundle:User:instruments", { 'user' : app.user, 'limit' : 2, offset : 2 })) %}
+    </div>
+  </div>
 </div>
 <div class="span5 well">
   {% if lessons is empty and asks is empty %}

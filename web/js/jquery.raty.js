@@ -443,7 +443,7 @@
     click         : undefined,
     half          : false,
     halfShow      : true,
-    hints         : ['débutant', 'intermédiaire', 'confirmé', 'expert', 'gorgeous'],
+    hints         : ['dÃ©butant', 'intermÃ©diaire', 'confirmÃ©', 'expert'],
     iconRange     : undefined,
     mouseout      : undefined,
     mouseover     : undefined,
