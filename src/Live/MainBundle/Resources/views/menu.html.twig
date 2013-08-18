@@ -5,7 +5,7 @@
       <li id="menu-logo">
         <a href="{{ path('index') }}"><img src="{{ asset('img/logo.png') }}" style="vertical-align: middle;"></a>
       </li>
-      <li>
+      <li class="hidden-phone">
         <a href="#">Catégories</a>
         <ul>
             <li><a href="{{ path('category_show', {'slug' : 'association' }) }}">Association</a></li>
@@ -13,10 +13,10 @@
             <li><a href="{{ path('category_show', {'slug' : 'musique' }) }}">Musique</a></li>
         </ul>
       </li>
-      <li><a href="{{ path('about') }}">A propos</a></li>
+      <li class="hidden-phone"><a href="{{ path('about') }}">A propos</a></li>
     </ul>
-    <ul class="main right" style="float: right; position: relative; right: -1px;">
-      <li>
+    <ul class="main right " style="float: right; position: relative; right: -1px;">
+      <li class="hidden-phone">
         <a href="#">Suivez nous</a>
         <ul id="menu-follow">
            <li><a href="https://www.facebook.com/live.efrei">Facebook</a></li>

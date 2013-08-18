@@ -162,7 +162,7 @@ body {
 
 #slider {
     display: block;
-    height: 400px;
+    max-height: 400px;
     background: black;
 }
 
