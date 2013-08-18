@@ -4,9 +4,21 @@
 <div class="container">
     <h1>Edition d'un article</h1>
 
-    <form action="{{ path('admin_post_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<div class="row">
+    <div class="span8">
+        <form action="{{ path('admin_post_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
+        <div>
+          {{ form_widget(edit_form.title) }}
+        </div>
+        <div>
+          {{ form_widget(edit_form.content) }}
+        </div>
+    </div>
+    <div class="span4">
+        {{ form_rest(edit_form) }}
+    </div>
+</div>
         <p>
             <button type="submit" class="btn btn-large btn-primary">Editer</button>
              <a href="{{ path('admin_post') }}"><button class="btn btn-large" type="button">Retour à la liste des actions</button></a>
