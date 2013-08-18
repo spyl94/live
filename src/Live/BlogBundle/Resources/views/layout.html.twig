@@ -2,52 +2,51 @@
 
 {% block stylesheets %}
     {{ parent() }}
-     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
-     <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/nivo-slider.css') }}">
-     <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/themes/default/default.css') }}" type="text/css" media="screen" />
-<style>
-.nivoSlider {
-    position:relative;
-    background:url(web/bundles/liveblog/images/loading.gif) no-repeat 50% 50%;
-}
-.nivoSlider img {
-    position:absolute;
-    top:0px;
-    left:0px;
-    display:none;
-}
-.nivoSlider a {
-    border:0;
-    display:block;
-}
-</style>
+    <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/nivo-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/themes/default/default.css') }}" type="text/css" media="screen" />
+    <style>
+    .nivoSlider {
+        position:relative;
+        background:url(web/bundles/liveblog/images/loading.gif) no-repeat 50% 50%;
+    }
+    .nivoSlider img {
+        position:absolute;
+        top:0px;
+        left:0px;
+        display:none;
+    }
+    .nivoSlider a {
+        border:0;
+        display:block;
+    }
+    </style>
 
 {% endblock %}
 
 {% block javascripts %}
-            {{ parent() }}
-            <!-- Nivo Slider -->
-            <script src="{{ asset('bundles/liveblog/js/jquery.nivo.slider.pack.js') }}" type="text/javascript"></script>
-            <script type="text/javascript">
-            $(window).load(function() {
-                $('#slider').nivoSlider();
-                $('#slider-bkg').show();
-            });
-            </script>
+    {{ parent() }}
+    <!-- Nivo Slider -->
+    <script src="{{ asset('bundles/liveblog/js/jquery.nivo.slider.pack.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+        $('#slider-bkg').show();
+    });
+    </script>
 {% endblock %}
 
 {% block navbar %}
-{% include "LiveMainBundle::menu.html.twig" %}
+    {% include "LiveMainBundle::menu.html.twig" %}
 
     <div class="slider-wrapper container theme-default">
         <div id="slider" class="nivoSlider">
             <img src="{{ asset('bundles/liveblog/images/slider/live_assos.jpg') }}" alt="" title="#live-assos-prez" />
-            <a href="http://dev7studios.com"><img src="{{ asset('bundles/liveblog/images/slider/jam_sess.jpg') }}" alt="" title="#htmlcaption" /></a>
+            <a href="{{ path('about') }}"><img src="{{ asset('bundles/liveblog/images/slider/jam_sess.jpg') }}" alt="" title="#htmlcaption" /></a>
+            <img src="{{ asset('bundles/liveblog/images/slider/batterie.jpg') }}" alt="" />
             <img src="{{ asset('bundles/liveblog/images/slider/jam_sess_2.jpg') }}" alt="" />
         </div>
     </div>
     <div id="live-assos-prez" class="nivo-html-caption">
         Live Efrei est l'association musicale de L'efrei. <a href="#">En savoir plus !</a>
     </div>
-
 {% endblock %}
