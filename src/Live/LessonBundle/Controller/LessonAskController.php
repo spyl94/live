@@ -44,9 +44,7 @@ class LessonAskController extends Controller
     public function listAction($user)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('LiveLessonBundle:LessonAsk')->findByCreator($user, array('createdAt' => 'asc'));
-
+        $entities = $em->getRepository('LiveLessonBundle:LessonAsk')->findByCreator($user, array('name' => 'asc', 'level' => 'asc'));
         $form = $this->createForm(new LessonAskType($this->getUser()->getId()), new LessonAsk());
 
         $deleteForms = array();

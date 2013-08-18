@@ -7,6 +7,9 @@
       <a href="{{ path('category_show', {'slug' : category.slug }) }}">{{ category.name }}</a> •
     {% endfor %}
     {{ post.publicationDateStart | localizeddate('full', 'none')}}
+    {% if is_granted('ROLE_TEAM') %}
+      •  <a href="{{ path('admin_post_edit', { "id": post.id }) }}">Editer</a>
+    {% endif %}
     </div>
 
     {% if post.content | length > 10000 %}
