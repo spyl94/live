@@ -39,6 +39,13 @@ class UserController extends Controller
     {
         $instruments = $user->getInstruments();
 
+        if ($instruments->isEmpty()) {
+            $em = $this->getDoctrine()->getManager();
+            $instruments = $em->getRepository('LiveLessonBundle:Instrument')->getInstrumentsLowLevel();
+            $user->setInstruments($instruments);
+            $em->flush();
+        }
+
         return array(
             'instruments' => $instruments,
             'length' => $limit,
