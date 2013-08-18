@@ -22,8 +22,8 @@ class UserController extends Controller
         if (!$user) {
             throw $this->createNotFoundException('Impossible de trouver cet utilisateur !');
         }
-        $lessons = $em->getRepository('LiveLessonBundle:Lesson')->findByCreator($user, array('createdAt' => 'asc'));
-        $asks = $em->getRepository('LiveLessonBundle:LessonAsk')->findByCreator($user, array('createdAt' => 'asc'));
+        $lessons = $em->getRepository('LiveLessonBundle:Lesson')->findByCreator($user, array('name' => 'asc', 'level' => 'asc'));
+        $asks = $em->getRepository('LiveLessonBundle:LessonAsk')->findByCreator($user, array('name' => 'asc', 'level' => 'asc'));
 
         return array(
             'user' => $user,
