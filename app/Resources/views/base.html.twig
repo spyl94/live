@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.gif') }}" />
-        <title>{% block title %}live.assos.efrei.fr{% endblock %}</title>
+        <title>{% block title 'Live Efrei' %}</title>
 
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" />
@@ -16,9 +16,9 @@
     <body>
         <div id="wrap">
 
-            {% block navbar %}{% endblock %} <!-- end block navbar -->
+            {% block navbar '' %} <!-- end block navbar -->
 
-            {% block body %}{% endblock %} <!-- end block body -->
+            {% block body '' %} <!-- end block body -->
 
             <br><br><br>
             <div class="clearfix"></div>

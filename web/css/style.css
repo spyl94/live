@@ -143,6 +143,7 @@ body {
 #menu-container #menu-user {
   margin-left: -130px;
 }
+
 #menu-container #menu-follow {
 
 }
@@ -377,10 +378,9 @@ h2.post-title:hover {
     display: block;
     background: #ffcc00;
     padding: 20px 10px 5px 10px;
-    text-align: center;
     border-radius: 10px;
+    text-align: center;
 }
-
 .content-form input {
   width: 80%;
   padding: 9px 12px 10px 32px;
@@ -396,7 +396,6 @@ h2.post-title:hover {
 .form-horizontal .control-group {
   margin-bottom: 10px;
 }
-
 #fos_user_registration_form_username, #username {
   background:#eaedf2 url('../img/login/user.png') 10px 13px no-repeat;
 }
@@ -406,7 +405,11 @@ h2.post-title:hover {
 .content-form input[type="password"] {
   background:#eaedf2 url('../img/login/password.png') 10px 10px no-repeat;
 }
-
+/* Fix */
+.control-group.error {
+  margin-left: -5px;
+  margin-right: 5px;
+}
 .content-form .btn-submit {
   font-size: 16px;
   border: none;
@@ -428,12 +431,10 @@ h2.post-title:hover {
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
 }
-
 .btn-submit:hover {
   background: #EE9A49;
   color: #ffffff;
 }
-
 #_submit input {
   width: 90%;
   height: 50px;

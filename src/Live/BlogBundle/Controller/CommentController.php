@@ -35,6 +35,7 @@ class CommentController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Comment entity.
      *

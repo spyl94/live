@@ -16,6 +16,4 @@ class SecurityController extends BaseController
         return $this->container->get('templating')->renderResponse($template, $data);
     }
 
-
-
 }

@@ -1,0 +1,30 @@
+{% extends "LiveCalendarBundle::layout.html.twig" %}
+
+{% block body %}
+    <div id="calendar"></div>
+    <div id="event_edit_container">
+        <form>
+            <input type="hidden" />
+            <ul>
+                <li>
+                    <span>Date: </span><span class="date_holder"></span>
+                </li>
+                <li>
+                    <label for="start">Début: </label><select name="start"><option value="">Select Start Time</option></select>
+                </li>
+                <li>
+                    <label for="end">Fin: </label><select name="end"><option value="">Select End Time</option></select>
+                </li>
+                <li>
+                    <label for="title">Titre: </label><input type="text" name="title" />
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="legende">
+        <span class="case-legende validate"></span><span class="case-text">Validé</span>
+        <span class="case-legende waiting"></span><span class="case-text">En attente</span>
+        <span class="case-legende refused"></span><span class="case-text">Refusé</span>
+        <span class="case-legende past"></span><span class="case-text">Passé</span>
+    </div>
+{% endblock %}
