@@ -1,5 +1,19 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <span class="help-inline">
+            {% for error in errors %}
+                {{ error.messageTemplate|trans(error.messageParameters,  'validators')~'. ' }}
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% form_theme form _self %}
+
 {% block fos_user_content %}
 <div style="margin-top: 100px"></div>
 {% include "FOSUserBundle:Registration:register_content.html.twig" %}

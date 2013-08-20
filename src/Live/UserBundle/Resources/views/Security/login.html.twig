@@ -14,11 +14,11 @@
         </div>
     </div>
     <div class="span4 content-form">
+        <a href="#" id="facebook-login" ><img style="width: 296px" src="{{ asset('img/login/facebook.png') }}" alt="" /></a>
+        <h3 style="font-size: 20px"> Ou </h3>
         {% if error %}
             <div class="control-group error"><span class="help-inline">{{ error|trans({}, 'FOSUserBundle') }} !</span></div>
         {% endif %}
-                <a href="#" id="facebook-login" ><img style="width: 296px" src="{{ asset('img/login/facebook.png') }}" alt="" /></a>
-                <h3 style="font-size: 20px"> Ou </h3>
         <form class="form-vertical" action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
             <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Entrez votre pseudo ou email" />

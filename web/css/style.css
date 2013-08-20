@@ -405,11 +405,6 @@ h2.post-title:hover {
 .content-form input[type="password"] {
   background:#eaedf2 url('../img/login/password.png') 10px 10px no-repeat;
 }
-/* Fix */
-.control-group.error {
-  margin-left: -5px;
-  margin-right: 5px;
-}
 .content-form .btn-submit {
   font-size: 16px;
   border: none;

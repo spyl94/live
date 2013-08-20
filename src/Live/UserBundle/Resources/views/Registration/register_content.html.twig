@@ -9,25 +9,25 @@
 
 				{% if form_errors(form) is not empty %}
 					<div class="control-group error">
-						<span class="help-inline">{{ form_errors(form) }}</span>
+							{{ form_errors(form) }}
 					</div>
 				{% endif %}
 
 				<div class="control-group{% if form_errors(form.username) is not empty %} error{% endif %}">
 					{{ form_widget(form.username, { 'attr': {'placeholder': 'Choisissez un Pseudo', 'id' : 'username'} }) }}
-					<span class="help-inline">{{ form_errors(form.username) }}</span>
+					{{ form_errors(form.username) }}
 				</div>
 				<div class="control-group{% if form_errors(form.email) is not empty %} error{% endif %}">
 					{{ form_widget(form.email, { 'attr': {'placeholder': 'Entrez votre email'} }) }}
-					<span class="help-inline">{{ form_errors(form.email) }}</span>
+					{{ form_errors(form.email) }}
 				</div>
 				<div class="control-group{% if form_errors(form.plainPassword.first) is not empty %} error{% endif %}">
 					{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Choisissez un Mot de Passe'} }) }}
-					<span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+					{{ form_errors(form.plainPassword.first) }}
 				</div>
 				<div class="control-group{% if form_errors(form.plainPassword.second) is not empty %} error{% endif %}">
 					{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Répétez le Mot de Passe'} }) }}
-					<span class="help-inline">{{ form_errors(form.plainPassword.second) }}</span>
+					{{ form_errors(form.plainPassword.second) }}
 				</div>
 
 				{{ form_rest(form) }}
