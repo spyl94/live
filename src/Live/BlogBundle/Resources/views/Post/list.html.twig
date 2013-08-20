@@ -1,7 +1,7 @@
 {% for post in posts %}
   <div class="post">
     <a href="{{ path('post_show', {'slug' : post.slug }) }}"><h2 class="post-title">{{ post.title }}</h2></a>
-    <div id="author-category-date">
+    <div class="author-category-date">
     Par <a href="{{ path('fos_user_profile_show', {'id' : post.author.id }) }}">{{ post.author }}</a>  •
     {% for category in post.categories %}
       <a href="{{ path('category_show', {'slug' : category.slug }) }}">{{ category.name }}</a> •
