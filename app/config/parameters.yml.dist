@@ -16,3 +16,5 @@ parameters:
 
     app_id_facebook:
     app_secret_facebook:
+
+    ga_tracking: UA-xxxxx-x
