@@ -2,12 +2,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets filter='cssrewrite' output='css/compiled/slider.css'
-                        'bundles/liveblog/css/nivo-slider.css'
-                        'bundles/liveblog/css/themes/default/default.css'
-             %}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/nivo-slider.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/liveblog/css/themes/default/default.css') }}" type="text/css" />
 {% endblock %}
 
 {% block javascripts %}
