@@ -4,7 +4,7 @@ Site de Live Efrei
 1) Installation
 ----------------------------------
 
-    git pull git@github.com:spyl94/live.git
+    git clone git@github.com:spyl94/live.git
 
     php composer.phar install
 
@@ -18,8 +18,19 @@ Execute the `check.php` script from the command line:
 
     php app/check.php
 
-Access the `config.php` script from a browser:
-
-    http://localhost/path/to/symfony/app/web/config.php
-
 If you get any warnings or recommendations, fix them before moving on.
+
+3) Clearing the cache
+-------------------------------------
+
+    php app/console cache:clear
+
+    php app/console cache:clear --env=prod
+
+3) Dump css files
+-------------------------------------
+
+    php app/console assetic:dump
+
+    php app/console assetic:dump --env=prod --no-debug
+
