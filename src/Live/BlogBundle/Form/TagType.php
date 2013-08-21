@@ -11,11 +11,11 @@ class TagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            //->add('enabled')
-            //->add('slug')
-            //->add('createdAt')
-            //->add('updatedAt')
+            ->add('name', 'text', array(
+                                    'label' => 'Nom',
+                                    'attr'      => array('placeholder' => 'Nouveau Tag')
+
+                ))
         ;
     }
 

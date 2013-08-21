@@ -7,9 +7,10 @@
         <title>{% block title 'Live Efrei' %}</title>
 
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
+            {% stylesheets 'css/*' filter='cssrewrite,yui_css' output='css/compiled/style.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+            {% endstylesheets %}
+        <!-- This is a compiled and minified css file -->
         {% endblock %}
 
     </head>
