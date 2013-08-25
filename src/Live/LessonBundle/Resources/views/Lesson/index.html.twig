@@ -1,43 +1,37 @@
-{% extends '::base.html.twig' %}
+{% extends "LiveMainBundle::layout.html.twig" %}
 
-{% block body -%}
-    <h1>Lesson list</h1>
+{% block body %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Createdat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('lesson_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.content }}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('lesson_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('lesson_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="container">
+        <h1>Module Profs / Elèves</h1>
+        <div class="row">
+            <div class="span6">
+                <h3>Propositions de cours :</h3>
+                <table class="table">
+                    <tbody>
+                        {% for entity in entities %}
+                        <tr class="success">
+                            <td><a href="{{ path('users_view', {'slug' : entity.creator.usernameCanonical }) }}">{{ entity.creator }}</a></td>
+                            <td>{{ entity.instrument }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="span6">
+                <h3>Demandes de cours :</h3>
+                <table class="table">
+                    <tbody>
+                        {% for entity in asks %}
+                        <tr class="info">
+                            <td><a href="{{ path('users_view', {'slug' : entity.creator.usernameCanonical }) }}">{{ entity.creator }}</a></td>
+                            <td>{{ entity.instrument }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
 
-        <ul>
-        <li>
-            <a href="{{ path('lesson_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+{% endblock %}

@@ -17,26 +17,7 @@ use Live\LessonBundle\Form\LessonAskType;
  */
 class LessonAskController extends Controller
 {
-
     /**
-     * Lists all LessonAsk entities.
-     *
-     * @Route("/", name="lessonask")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('LiveLessonBundle:LessonAsk')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-
-     /**
      * Lists all Lesson entities of a user.
      *
      * @Template()
@@ -88,110 +69,6 @@ class LessonAskController extends Controller
         );
     }
 
-    /**
-     * Displays a form to create a new LessonAsk entity.
-     *
-     * @Route("/new", name="lessonask_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new LessonAsk();
-        $form   = $this->createForm(new LessonAskType($this->getUser()->getId()), $entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Finds and displays a LessonAsk entity.
-     *
-     * @Route("/{id}", name="lessonask_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('LiveLessonBundle:LessonAsk')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find LessonAsk entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing LessonAsk entity.
-     *
-     * @Route("/{id}/edit", name="lessonask_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('LiveLessonBundle:LessonAsk')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find LessonAsk entity.');
-        }
-
-        $editForm = $this->createForm(new LessonAskType($this->getUser()->getId()), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Edits an existing LessonAsk entity.
-     *
-     * @Route("/{id}", name="lessonask_update")
-     * @Method("PUT")
-     * @Template("LiveLessonBundle:LessonAsk:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('LiveLessonBundle:LessonAsk')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find LessonAsk entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new LessonAskType($this->getUser()->getId()), $entity);
-        $editForm->submit($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('lessonask_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
     /**
      * Deletes a LessonAsk entity.
      *

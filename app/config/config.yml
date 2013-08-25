@@ -137,6 +137,11 @@ services:
             [ @doctrine.orm.entity_manager, @router]
         tags:
             - { name: kernel.event_subscriber }
+    live_user.profile:
+        class: Live\UserBundle\EventListener\ProfileListener
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
     gedmo.listener.softdeleteable:
         class: Gedmo\SoftDeleteable\SoftDeleteableListener
         tags:
