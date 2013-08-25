@@ -29,10 +29,11 @@
       <a href="{{ path('fos_user_profile_edit') }}" class="btn-action">Demande des cours !</a> <br>
       </p>
 
+      {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
       <p>Alors qu'est ce tu attends ? :-)</p>
         <a href="#" id="facebook-login" class="btn-action btn-big facebook">Me connecter via Facebook</a>
         <a href="{{ path('fos_user_registration_register') }}" class="btn-action btn-big">Je veux m'inscrire !</a>
-
+      {% endif %}
 
       <br>
       <a href="http://efrei.fr"><img src="{{ asset('img/Logo_Efrei.png') }}" alt=""></a>
