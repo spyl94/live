@@ -36,6 +36,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="#profile" data-toggle="tab">Profil</a></li>
         <li><a href="#profile-edit" data-toggle="tab">Informations</a></li>
+        <li>"{{ app.user.password }}"</li>
         {% if app.user.password != "" %}<li><a href="#password" data-toggle="tab">Mot de Passe</a></li>{% endif %}
     </ul>
     <div id="myTabContent" class="tab-content">
