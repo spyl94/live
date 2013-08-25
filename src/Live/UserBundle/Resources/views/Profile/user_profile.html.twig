@@ -1,0 +1,12 @@
+<div class="span1">
+    <a href="#" class="thumbnail"><img src="{{ gravatar(user.email) }}" alt=""></a>
+</div>
+ <div class="span3">
+    <a href="{{ path('users_view', {'slug' : user.usernameCanonical }) }}">{{ user.username }}</a>
+    <p><strong>{{ user.firstname }} {{ user.lastname }}</strong></p>
+    <span class="badge badge-warning">{{ user.email }}</span> <span class="badge badge-info">{{ user.promo }}</span>
+    {% if is_granted('ROLE_TEAM') %}<span class="badge badge-success">Equipe Live</span>
+    {% elseif user.cotisant %}<span class="badge badge-success">Cotisant</span>
+    {% endif %}
+
+</div>

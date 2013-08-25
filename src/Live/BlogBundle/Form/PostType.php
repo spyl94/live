@@ -84,21 +84,3 @@ class PostType extends AbstractType
         return 'live_blogbundle_posttype';
     }
 }
-
-         /*        $builder
-            ->add('title')
-            ->add('slug')
-            ->add('content')
-            ->add('contentFormatter')
-            ->add('enabled')
-            ->add('publicationDateStart')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('commentsEnabled')
-            ->add('commentsCount')
-            ->add('author')
-            ->add('categories')
-            ->add('tags')
-        ;
-
-        */

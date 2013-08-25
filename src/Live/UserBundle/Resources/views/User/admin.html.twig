@@ -1,0 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+{% for user in users %}
+{% if loop.index0 is even %}<div class="row">{% endif %}
+  <div class="span5 well">
+    {% include "FOSUserBundle:Profile:user_profile.html.twig" %}
+    <form action="{{ path('admin_users_edit', { 'id': user.id }) }}" method="post">{{ form_widget(forms[loop.index0]) }}
+      <button class="btn" type="submit">Valider</button>
+    </form>
+  </div>
+  {% if loop.index0 is odd %}</div>{% endif %}
+{% endfor %}
+{% endblock fos_user_content %}

@@ -1,0 +1,13 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+{% for user in users %}
+{% if loop.index0 is even %}<div class="row">{% endif %}
+  <div class="span5 well">
+    {% include "FOSUserBundle:Profile:user_profile.html.twig" %}
+  </div>
+  {% if loop.index0 is odd %}</div>{% endif %}
+{% endfor %}
+{% endblock fos_user_content %}
+

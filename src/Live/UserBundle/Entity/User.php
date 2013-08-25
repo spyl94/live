@@ -48,6 +48,13 @@ class User extends BaseUser
     protected $facebookId;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="cotisant", type="boolean", nullable=true)
+     */
+    private $cotisant;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Assert\NotBlank(message="Entrez votre promo.", groups={"Profile"})
@@ -161,6 +168,29 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set cotisant
+     *
+     * @param boolean $enabled
+     * @return Post
+     */
+    public function setCotisant($cotisant)
+    {
+        $this->cotisant = $cotisant;
+
+        return $this;
+    }
+
+    /**
+     * Get cotisant
+     *
+     * @return boolean
+     */
+    public function getCotisant()
+    {
+        return $this->cotisant;
     }
 
     /**

@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="span4 content-form">
-        <a href="#" id="facebook-login" ><img style="width: 296px" src="{{ asset('img/login/facebook.png') }}" alt="" /></a>
+        <input href="#" id="facebook-login" class="btn btn-submit facebook"  value="Me connecter via Facebook" />
         <h3 style="font-size: 20px"> Ou </h3>
         {% if error %}
             <div class="control-group error"><span class="help-inline">{{ error|trans({}, 'FOSUserBundle') }} !</span></div>
@@ -24,7 +24,7 @@
             <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Entrez votre pseudo ou email" />
             <input type="password" id="password" name="_password" placeholder="Mot de Passe" />
             <input type="checkbox" id="remember_me" name="_remember_me" value="on"  checked style="display:none;"/>
-            <input class="btn btn-submit" type="submit" id="_submit" name="_submit" value="Se connecter" />
+            <input class="btn btn-submit" type="submit" id="_submit" name="_submit" value="Me connecter" />
         </form>
         <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié ?</a>
     </div>

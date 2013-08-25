@@ -242,7 +242,13 @@ h3.section-title {
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
 }
-
+.btn-action.facebook, input.btn-submit.facebook {
+   background: #3B5998;
+   margin-bottom: 10px;
+}
+.btn-action.facebook:hover, .btn-submit.facebook:hover {
+   background: #344e86;
+}
 /**
   Post
 
@@ -417,11 +423,6 @@ h2.post-title:hover {
 .btn-submit:hover {
   background: #EE9A49;
   color: #ffffff;
-}
-#_submit input {
-  width: 90%;
-  height: 50px;
-  padding: 0 0 0 0;
 }
 
 
