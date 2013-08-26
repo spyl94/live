@@ -5,4 +5,3 @@
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
-sftp-config.json
