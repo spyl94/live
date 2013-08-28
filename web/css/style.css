@@ -609,3 +609,7 @@ ul.ul-live li
 .table form {
   margin: 0 0 0;
 }
+
+.tags a.btn-action {
+  line-height: 45px;
+}

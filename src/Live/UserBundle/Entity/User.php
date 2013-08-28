@@ -85,6 +85,11 @@ class User extends BaseUser
         $this->instruments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function isGranted($role)
+    {
+        return in_array($role, $this->getRoles());
+    }
+
     public function serialize()
     {
         return serialize(array($this->facebookId, parent::serialize()));
