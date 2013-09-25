@@ -24,7 +24,12 @@ class FacebookProvider implements UserProviderInterface
 
         // Add this to not have the error "the ssl certificate is invalid."
         Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
-        Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
+        Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = false;
+
+        // Connexion en ip v4 avec le proxy de l'efrei
+        Facebook::$CURL_OPTS[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
+        Facebook::$CURL_OPTS[CURLOPT_PROXYPORT] = 3128;
+        Facebook::$CURL_OPTS[CURLOPT_PROXY] = 'squid.efrei.fr';
 
 
         $this->userManager = $userManager;
@@ -49,13 +54,20 @@ class FacebookProvider implements UserProviderInterface
             $fbdata = $this->facebook->api('/me');
         } catch (FacebookApiException $e) {
             $fbdata = null;
+             throw new UsernameNotFoundException($e->getMessage());
         }
 
         if (!empty($fbdata)) {
             if (empty($user)) {
-                $user = $this->userManager->createUser();
-                $user->setEnabled(true);
-                $user->setPassword('');
+                // on regarde si l'email est déjà présente pour un compte
+                $user = $this->userManager->findUserByEmail($fbdata['email']);
+
+                if (empty($user)) {
+                    // nouvel utilisateur
+                    $user = $this->userManager->createUser();
+                    $user->setEnabled(true);
+                    $user->setPassword('');
+                }
             }
 
             // TODO use http://developers.facebook.com/docs/api/realtime
